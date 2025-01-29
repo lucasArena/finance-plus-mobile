@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios"
-import { HttpClientBase } from "@/infra/HttpClient/Base/HttpClientBase"
-import { IHttpClientContructor } from "@/infra/HttpClient/Base/HttpClient.types"
+import { HttpClientBase } from "@/infra/HttpClient/HttpClient"
+import { IHttpClientContructor } from "@/infra/HttpClient/HttpClient.types"
 
 export class HttpClientAxios extends HttpClientBase {
   private axiosInstance: AxiosInstance

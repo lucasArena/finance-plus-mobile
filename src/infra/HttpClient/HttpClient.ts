@@ -1,7 +1,7 @@
 import {
   IHttpClient,
   IHttpClientContructor,
-} from "@/infra/HttpClient/Base/HttpClient.types"
+} from "@/infra/HttpClient/HttpClient.types"
 
 export abstract class HttpClientBase implements IHttpClient {
   protected baseUrl: string

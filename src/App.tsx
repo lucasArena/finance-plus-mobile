@@ -1,7 +1,10 @@
 import React from "react"
+import { Routes } from "@/presentation/routes"
 
-import { SignInScreen } from "./src/screens/SignIn/SignInScreen"
+if (__DEV__) {
+  require("../ReactotronConfig")
+}
 
 export const App = () => {
-  return <SignInScreen />
+  return <Routes />
 }

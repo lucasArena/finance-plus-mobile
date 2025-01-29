@@ -1,116 +1,46 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from "react"
-import type { PropsWithChildren } from "react"
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from "react-native"
+import { SafeAreaView } from "react-native"
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from "react-native/Libraries/NewAppScreen"
+import { ButtonComponent } from "@/presentation/components/Button/ButtonComponent"
+import { useSignInScreenRules } from "@/presentation/screens/SignIn/SignInScreen.rules"
+import { InputFieldComponent } from "@/presentation/components/Input/Field/InputTextComponent"
 
-type SectionProps = PropsWithChildren<{
-  title: string
-}>
-
-function Section({ children, title }: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === "dark"
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  )
-}
-
-export function SignInScreen(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === "dark"
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  }
+export const SignInScreen = () => {
+  const rules = useSignInScreenRules()
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? "light-content" : "dark-content"}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <SafeAreaView>
+      <InputFieldComponent
+        label="Email"
+        value={rules.values.email}
+        autoCapitalize="none"
+        onChangeText={value => rules.handleSetValue("email", value)}
+        error={!!rules.errors.email}
+        helperText={rules.errors.email?.message}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+
+      <InputFieldComponent
+        label="Password"
+        secureTextEntry
+        value={rules.values.password}
+        error={!!rules.errors.password}
+        helperText={rules.errors.email?.password}
+        onChangeText={value => rules.handleSetValue("password", value)}
+      />
+
+      <ButtonComponent
+        mode="contained"
+        onPress={rules.handleSubmit}
+        disabled={rules.isWaiting}
+        loading={rules.isWaiting}>
+        Entrar
+      </ButtonComponent>
+
+      <ButtonComponent
+        mode="contained"
+        onPress={() => rules.handlePressSignUp()}>
+        Cadastrar-se
+      </ButtonComponent>
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "600",
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: "400",
-  },
-  highlight: {
-    fontWeight: "700",
-  },
-})

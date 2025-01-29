@@ -1,7 +1,7 @@
 import {
   IHttpClient,
   IHttpClientService,
-} from "@/infra/HttpClient/Base/HttpClient.types"
+} from "@/infra/HttpClient/HttpClient.types"
 import { CreateExpenseServiceNamespace } from "@/services/CreateExpense/CreateExpenseService.types"
 
 export class CreateExpenseService

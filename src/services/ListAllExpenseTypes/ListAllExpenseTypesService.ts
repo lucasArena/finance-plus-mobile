@@ -1,4 +1,4 @@
-import { IHttpClient } from "@/infra/HttpClient/Base/HttpClient.types"
+import { IHttpClient } from "@/infra/HttpClient/HttpClient.types"
 import { ListAllExpenseTypesServiceNamespace } from "@/services/ListAllExpenseTypes/ListAllExpenseTypesService.types"
 
 export class ListAllExpensesTypesService {

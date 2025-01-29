@@ -1,7 +1,7 @@
 import {
   IHttpClient,
   IHttpClientService,
-} from "@/infra/HttpClient/Base/HttpClient.types"
+} from "@/infra/HttpClient/HttpClient.types"
 import { UserSignInServiceNamespace } from "@/services/UserSignIn/UserSignInService.types"
 
 export class UserSignInService

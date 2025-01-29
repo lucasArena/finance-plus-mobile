@@ -5,3 +5,5 @@ coverage/*.js
 coverage/*
 jest/*.js
 tests/*
+babel.config.js
+metro.config.js
