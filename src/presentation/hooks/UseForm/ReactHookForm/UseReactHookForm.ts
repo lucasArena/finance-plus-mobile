@@ -1,14 +1,13 @@
 import { useMemo } from "react"
 import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-// import { yupResolver } from "@hookform/resolvers/yup"
 
 import {
   IFormFields,
   IUseForm,
   IUseFormResponse,
 } from "@/presentation/hooks/UseForm/UseForm.types"
-import { yupResolver } from "@hookform/resolvers/yup"
 
 export const useReactHookForm = <T extends IFormFields>(
   props: IUseForm<T>,
