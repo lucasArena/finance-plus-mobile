@@ -1,8 +1,30 @@
 import React from "react"
 
-import { Text } from "react-native-paper"
-import { TTextProps } from "@/presentation/components/Text/TextComponent.types"
+import { Text } from "react-native"
 
-export const TextComponent: React.FC<TTextProps> = ({ children, ...props }) => {
-  return <Text {...props}>{children}</Text>
+import { ITextProps } from "@/presentation/components/Text/TextComponent.types"
+import { useTextComponentStyles } from "@/presentation/components/Text/TextComponent.styles"
+
+export const TextComponent: React.FC<ITextProps> = ({
+  children,
+  size,
+  color,
+  weight,
+  underlined,
+  style,
+  ...props
+}) => {
+  const styles = useTextComponentStyles()
+
+  return (
+    <Text
+      {...props}
+      style={[
+        style,
+        underlined && styles.underlined,
+        { fontSize: size, color, fontWeight: weight },
+      ]}>
+      {children}
+    </Text>
+  )
 }

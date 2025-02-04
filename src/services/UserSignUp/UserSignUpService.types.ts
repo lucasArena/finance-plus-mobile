@@ -1,6 +1,6 @@
 export namespace UserSignUpServiceNamespace {
   export interface IRequest {
-    username: string
+    name: string
     email: string
     password: string
   }

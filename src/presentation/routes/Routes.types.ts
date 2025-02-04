@@ -10,4 +10,5 @@ export interface IRoutesRules {
     pageName: RouteName,
     ...params: IRoutes[RouteName] extends void ? [] : [IRoutes[RouteName]]
   ): void
+  handleGoBack: () => void
 }

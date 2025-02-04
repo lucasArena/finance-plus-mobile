@@ -22,8 +22,11 @@ export class HttpClientAxios extends HttpClientBase {
     this.axiosInstance.interceptors.response.use(
       response => response,
       error => {
-        // Handle errors globally
-        return Promise.reject(error)
+        const message =
+          error.response?.data?.message ||
+          "Unfortunately something went wrong. Try again later."
+
+        return Promise.reject({ message })
       },
     )
   }

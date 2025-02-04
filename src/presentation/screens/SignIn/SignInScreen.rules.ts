@@ -5,15 +5,20 @@ import { useForm } from "@/presentation/hooks/UseForm"
 import { useRoutes } from "@/presentation/routes"
 import { ISignInScreenForm } from "@/presentation/screens/SignIn/SignInScreen.types"
 import { useUserSignInHook } from "@/presentation/hooks/UseUserSignInHook"
+import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
+import { Toast } from "@/presentation/providers/Toast/ToastProvider"
 
 const schema = {
   email: yup.string().email().required(),
   password: yup.string().required(),
+  rememberMe: yup.boolean().notRequired(),
+  showPassword: yup.boolean().notRequired(),
 }
 
 export const useSignInScreenRules = () => {
   const navigation = useRoutes()
   const form = useForm<ISignInScreenForm>({ schema })
+  const auth = useAuth()
 
   const userSignIn = useUserSignInHook()
 
@@ -27,10 +32,19 @@ export const useSignInScreenRules = () => {
 
   useEffect(() => {
     if (userSignIn.isSuccess) {
-      console.log(userSignIn.data)
+      auth.signIn(userSignIn.data!.token)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userSignIn.isSuccess])
+
+  useEffect(() => {
+    if (userSignIn.error) {
+      Toast({ type: "error", text1: userSignIn.error })
+
+      userSignIn.handleResetState()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userSignIn.error])
 
   return {
     isWaiting: userSignIn.isWaiting,

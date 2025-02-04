@@ -16,5 +16,11 @@ export const useReactNavigationRoutes = (): IRoutesRules => {
     reactNavigation.navigate(pageName as TRouteName, params as any)
   }
 
-  return { handleNavigate }
+  const handleGoBack = () => {
+    if (reactNavigation.canGoBack()) {
+      reactNavigation.goBack()
+    }
+  }
+
+  return { handleNavigate, handleGoBack }
 }

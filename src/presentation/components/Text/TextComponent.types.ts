@@ -1,3 +1,8 @@
-import { TextProps } from "react-native-paper"
+import { TextProps, TextStyle } from "react-native"
 
-export type TTextProps = TextProps<any>
+export interface ITextProps extends TextProps {
+  size: TextStyle["fontSize"]
+  color: TextStyle["color"]
+  weight: TextStyle["fontWeight"]
+  underlined?: boolean
+}

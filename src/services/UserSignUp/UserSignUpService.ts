@@ -17,7 +17,7 @@ export class UserSignUpService
     data: UserSignUpServiceNamespace.IRequest,
   ): Promise<UserSignUpServiceNamespace.TResponse> {
     return await this.httpClient.post<UserSignUpServiceNamespace.TResponse>(
-      "/users/sign-in",
+      "/users/sign-up",
       data,
     )
   }

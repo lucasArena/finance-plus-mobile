@@ -1,3 +1,10 @@
-import { ButtonProps } from "react-native-paper"
+import { TouchableOpacityProps } from "react-native"
 
-export type TButtonProps = ButtonProps
+export type IButtonVariants = "primary" | "secondary"
+
+export interface IButtonProps extends TouchableOpacityProps {
+  variant: IButtonVariants
+  loading?: boolean
+  fullWidth?: boolean
+  startIcon?: React.ReactNode
+}
