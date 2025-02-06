@@ -12,6 +12,8 @@ export interface ITheme {
     green: string
   }
   tertiary: {
+    linear: string
+    background: string
     grey: string
   }
   error: string

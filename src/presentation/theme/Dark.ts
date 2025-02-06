@@ -14,6 +14,8 @@ export const darkTheme: ITheme = {
     light: "#F5F5F5",
   },
   tertiary: {
+    background: "#20233C",
+    linear: "#13142B",
     grey: "#A0A0A0",
   },
   error: "#FD4A4A",

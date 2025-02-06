@@ -1,5 +1,5 @@
 import { makeListUserExpensesFactory } from "@/application/factories/services/ListUserExpensesFactory"
-import { useFetchHook } from "@/presentation/hooks/UseFetchHook"
+import { useFetchPaginateHook } from "@/presentation/hooks/UseFetchPaginateHook"
 
 export const useListUserExpensesHook = () =>
-  useFetchHook(makeListUserExpensesFactory())
+  useFetchPaginateHook(makeListUserExpensesFactory())

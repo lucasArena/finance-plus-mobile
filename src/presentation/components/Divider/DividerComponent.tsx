@@ -11,6 +11,10 @@ export const DividerComponent: React.FC<IDividerComponentProps> = props => {
     <View
       style={{
         ...styles.container,
+        marginTop: props.topSpacing,
+        marginBottom: props.bottomSpacing,
+        marginVertical: props.verticalSpacing,
+        width: props.width,
         height: props.height,
         backgroundColor: props.color,
       }}

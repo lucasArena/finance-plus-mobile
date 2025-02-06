@@ -1,14 +1,14 @@
-export namespace ListUserExpensesServiceNamespace {
-  export type TRequest = void
+import { IExpense } from "@/domain/Expense.types"
+import {
+  IPaginationRequest,
+  IPaginationResponse,
+} from "@/application/utils/types/pagination.types"
 
-  export interface IResponse {
-    key: string
-    description: string
-    type: {
-      name: string
-      description: string
-    }
-    createdAt: string
-    updatedAt: string
+export namespace ListUserExpensesServiceNamespace {
+  export interface IRequest extends IPaginationRequest {
+    month: number
+    year: number
   }
+
+  export interface IResponse extends IPaginationResponse<IExpense> {}
 }

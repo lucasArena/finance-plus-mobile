@@ -1,5 +1,8 @@
 import React, { createContext, useContext } from "react"
-import { IAuthContext, IAuthProviderProps } from "./AuthProvider.types"
+import {
+  IAuthContext,
+  IAuthProviderProps,
+} from "@/presentation/providers/Auth/AuthProvider.types"
 import { useAuthProvider } from "@/presentation/providers/Auth/AuthProvider.rules"
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined)

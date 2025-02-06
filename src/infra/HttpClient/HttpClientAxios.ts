@@ -13,9 +13,10 @@ export class HttpClientAxios extends HttpClientBase {
       timeout: 5000,
     })
 
-    // Add interceptors if needed
     this.axiosInstance.interceptors.request.use(requestConfig => {
-      // Add headers, auth tokens, etc.
+      if (HttpClientBase.token) {
+        requestConfig.headers.Authorization = `Bearer ${HttpClientBase.token}`
+      }
       return requestConfig
     })
 

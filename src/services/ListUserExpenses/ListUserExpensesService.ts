@@ -5,10 +5,11 @@ export class ListUserExpensesService {
   constructor(private readonly httpClient: IHttpClient) {}
 
   async handle(
-    _: ListUserExpensesServiceNamespace.TRequest,
+    params: ListUserExpensesServiceNamespace.IRequest,
   ): Promise<ListUserExpensesServiceNamespace.IResponse> {
     return await this.httpClient.get<ListUserExpensesServiceNamespace.IResponse>(
       "/users/expenses",
+      params,
     )
   }
 }

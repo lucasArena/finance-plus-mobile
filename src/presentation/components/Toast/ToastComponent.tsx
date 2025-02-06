@@ -3,7 +3,7 @@ import React from "react"
 import { IToastComponentProps } from "@/presentation/components/Toast/ToastComponent.types"
 import { View } from "react-native"
 import { TextComponent } from "@/presentation/components/Text/TextComponent"
-import { useToastComponentStyles } from "./ToastComponent.styles"
+import { useToastComponentStyles } from "@/presentation/components/Toast/ToastComponent.styles"
 
 import CheckLogo from "@/presentation/assets/check-logo.svg"
 import { useTheme } from "@/presentation/theme/Theme"

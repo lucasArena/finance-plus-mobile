@@ -6,12 +6,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { SignUpScreen } from "@/presentation/screens/SignUp/SignUpScreen"
 import { HomeScreen } from "@/presentation/screens/Home/HomeScreen"
 import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
+import { ProfileScreen } from "@/presentation/screens/Profile/ProfileScreen"
+import { ListExpensesByDateScreen } from "@/presentation/screens/ListExpensesByDate/ListExpensesByDateScreen"
 
 export const ReactNavigationRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator()
   const auth = useAuth()
 
-  console.log("routes", auth.token)
   const isUserAutheticated = !!auth.token
 
   return (
@@ -21,6 +22,11 @@ export const ReactNavigationRoutes: React.FC = () => {
           screenOptions={{ headerShown: false }}
           initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen
+            name="ListExpensesByDate"
+            component={ListExpensesByDateScreen as any}
+          />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

@@ -21,7 +21,7 @@ export const useFetchHook = <TRequest, TResponse>(
       setIsSuccess(true)
 
       return response
-      // eslint-disable-next-line no-catch-shadow
+      // eslint-disable-next-line no-catch-shadow, @typescript-eslint/no-shadow
     } catch (error) {
       const safeError = error as Error
 
