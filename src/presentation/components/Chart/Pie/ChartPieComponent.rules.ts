@@ -1,14 +1,5 @@
+import { randomColorUtil } from "@/application/utils/RandomColor/RandomColorUtil"
 import { IChartPieComponentProps } from "@/presentation/components/Chart/Pie/ChartPieComponent.types"
-
-export const generateRandomColor = () => {
-  const letters = "0123456789ABCDEF"
-  let color = "#"
-
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)]
-  }
-  return color
-}
 
 export const useChartComponentRules = (props: IChartPieComponentProps) => {
   const total = props.data.reduce(
@@ -19,8 +10,8 @@ export const useChartComponentRules = (props: IChartPieComponentProps) => {
   const formattedData = props.data.map(data => ({
     label: data.label,
     value: data.value,
-    color: generateRandomColor(),
-    percentage: Math.floor((data.value / total) * 100),
+    color: randomColorUtil(),
+    percentage: Math.round((data.value / total) * 100),
     show: true,
   }))
 

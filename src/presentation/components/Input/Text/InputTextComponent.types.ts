@@ -1,4 +1,4 @@
-import { TextInputProps } from "react-native"
+import { TextInputProps, ViewStyle } from "react-native"
 
 export interface IInputTextComponentProps extends TextInputProps {
   label?: string
@@ -7,4 +7,8 @@ export interface IInputTextComponentProps extends TextInputProps {
   endIcon?: React.ReactNode
   disabled?: boolean
   required?: boolean
+  locale?: string
+  loading?: boolean
+  containerStyles?: ViewStyle
+  render?: React.ElementType<TextInputProps>
 }

@@ -129,14 +129,6 @@ export const SignInScreen = () => {
           </View>
 
           <View style={styles.signInOptionsContainer}>
-            <ButtonComponent
-              fullWidth
-              variant="secondary"
-              disabled={rules.isWaiting}
-              startIcon={<GoogleLogo />}>
-              Google
-            </ButtonComponent>
-
             {Platform.OS === "ios" && (
               <ButtonComponent
                 variant="secondary"

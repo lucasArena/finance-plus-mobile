@@ -1,5 +1,5 @@
 import React from "react"
-import { View, TextInput } from "react-native"
+import { View, TextInput, Pressable, ActivityIndicator } from "react-native"
 
 import { IInputTextComponentProps } from "@/presentation/components/Input/Text/InputTextComponent.types"
 import { useInputTextComponentStyles } from "@/presentation/components/Input/Text/InputTextComponent.styles"
@@ -10,13 +10,25 @@ export const InputTextComponent: React.FC<IInputTextComponentProps> = props => {
   const theme = useTheme()
   const styles = useInputTextComponentStyles()
 
+  const Input = (props.render as unknown as React.ElementType) ?? TextInput
+
+  const endIcon = props.loading ? (
+    <ActivityIndicator size={24} />
+  ) : (
+    props.endIcon
+  )
+
+  const isDisabled = props.loading || props.disabled
+
   return (
-    <View
+    <Pressable
       style={[
         styles.container,
         props.error && styles.error,
-        props.disabled && styles.disabled,
-      ]}>
+        isDisabled && styles.disabled,
+        props.containerStyles,
+      ]}
+      onPress={props.onPress}>
       <View style={styles.labelContainer}>
         <TextComponent
           size={16}
@@ -26,14 +38,14 @@ export const InputTextComponent: React.FC<IInputTextComponentProps> = props => {
         </TextComponent>
       </View>
 
-      <TextInput
+      <Input
         {...props}
         editable={!props.disabled}
         style={styles.input}
         placeholderTextColor={theme.tertiary.grey}
       />
 
-      {props.endIcon}
-    </View>
+      {endIcon}
+    </Pressable>
   )
 }

@@ -21,7 +21,7 @@ export const FilterCalendarComponent: React.FC<
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => rules.handleGoBack()}>
+      <Pressable onPress={() => rules.handleGoBack()} disabled={props.disabled}>
         <ArrowLeftCircleLogo />
       </Pressable>
 
@@ -34,7 +34,9 @@ export const FilterCalendarComponent: React.FC<
         </TextComponent>
       </View>
 
-      <Pressable onPress={() => rules.handleGoForward()}>
+      <Pressable
+        onPress={() => rules.handleGoForward()}
+        disabled={props.disabled}>
         <ArrowRightCircleLogo />
       </Pressable>
     </View>

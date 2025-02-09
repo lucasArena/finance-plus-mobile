@@ -6,9 +6,9 @@ export class ListAllExpensesTypesService {
 
   async handle(
     _: ListAllExpenseTypesServiceNamespace.TRequest,
-  ): Promise<ListAllExpenseTypesServiceNamespace.IResponse> {
-    return await this.httpClient.get<ListAllExpenseTypesServiceNamespace.IResponse>(
-      "/configurations/expenses/types",
-    )
+  ): Promise<ListAllExpenseTypesServiceNamespace.IResponse[]> {
+    return await this.httpClient.get<
+      ListAllExpenseTypesServiceNamespace.IResponse[]
+    >("/configurations/expenses/types")
   }
 }

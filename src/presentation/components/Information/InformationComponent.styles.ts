@@ -10,7 +10,7 @@ export const useInformationComponentStyles = () => {
     noShow: {
       opacity: 0,
     },
-    title: {
+    text: {
       textAlign: "center",
     },
   })

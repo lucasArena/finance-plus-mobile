@@ -28,5 +28,23 @@ export const useHomeScreenStyles = () => {
     expensesItem: {
       gap: 12,
     },
+    fabContainer: {
+      position: "absolute",
+      right: 20,
+      bottom: 30,
+      gap: 10,
+    },
+    fab: {
+      backgroundColor: theme.white.light,
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      justifyContent: "center",
+      alignItems: "center",
+      shadowColor: theme.black.main,
+      shadowOpacity: 0.3,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 5,
+    },
   })
 }

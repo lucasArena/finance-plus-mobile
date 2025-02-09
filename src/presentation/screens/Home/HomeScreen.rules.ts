@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { listUserExpensesAdapter } from "@/application/adapters/ListUserExpensesAdapter"
 import { useHomeFacadeHook } from "@/presentation/hooks/UseHomeFacadeHook"
+import { IBottomSheetComponentRef } from "@/presentation/components/BottomSheet/BottomSheetComponent.types"
 
 const EXPENSES_LIMIT = 5
 const currentDate = new Date()
 
 export const useHomeScreenRules = () => {
   const [date, setDate] = useState<Date>(currentDate)
+  const createNewExpenseRef = useRef<IBottomSheetComponentRef>(null)
 
   const homeFacadeHook = useHomeFacadeHook()
 
@@ -28,6 +30,7 @@ export const useHomeScreenRules = () => {
     const safeYear = selectedDate.getFullYear()
     const safeMonth = selectedDate.getMonth() + 1
 
+    homeFacadeHook.handleResetState()
     homeFacadeHook.handleFetch({
       month: safeMonth,
       year: safeYear,
@@ -36,16 +39,31 @@ export const useHomeScreenRules = () => {
     setDate(new Date(selectedDate))
   }
 
+  console.log(homeFacadeHook.data?.expenses)
+
+  const handleOpenCreateNewExpenses = () => {
+    createNewExpenseRef.current?.open()
+  }
+
+  const handleCloseCreateNewExpenses = () => {
+    createNewExpenseRef.current?.close()
+  }
+
   useEffect(() => {
     handleChangeDate(date)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {
+    createNewExpenseRef,
     date,
+    error: homeFacadeHook.error,
+    isWaiting: homeFacadeHook.isWaiting,
     isShowMoreExpensesButtonVisable,
     expenses: safeExpenses,
     expensesGrouped: safeExpensesGrouped,
     handleChangeDate,
+    handleOpenCreateNewExpenses,
+    handleCloseCreateNewExpenses,
   }
 }

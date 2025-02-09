@@ -21,11 +21,15 @@ export const InformationComponent: React.FC<
         size={18}
         color={theme.white.light}
         weight={500}
-        style={styles.title}>
+        style={styles.text}>
         {props.title}
       </TextComponent>
 
-      <TextComponent size={14} color={theme.white.light} weight={500}>
+      <TextComponent
+        size={14}
+        color={theme.white.light}
+        weight={500}
+        style={styles.text}>
         {props.subtitle}
       </TextComponent>
     </View>
