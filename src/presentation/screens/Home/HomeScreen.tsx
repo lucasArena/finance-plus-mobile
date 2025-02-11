@@ -134,6 +134,9 @@ export const HomeScreen: React.FC = () => {
                             description={expense.description}
                             value={expense.value}
                             typeName={expense.type.name}
+                            onPress={() =>
+                              rules.handleOpenCreateNewExpenses(expense)
+                            }
                           />
                         ))}
                       </View>
@@ -156,9 +159,10 @@ export const HomeScreen: React.FC = () => {
         </Pressable>
       </View>
 
-      <BottomSheetContainerComponent ref={rules.createNewExpenseRef}>
-        <ExpenseSheet onClose={rules.handleCloseCreateNewExpenses} />
-      </BottomSheetContainerComponent>
+      <BottomSheetContainerComponent
+        ref={rules.createNewExpenseRef}
+        SheetComponent={ExpenseSheet}
+      />
     </View>
   )
 }

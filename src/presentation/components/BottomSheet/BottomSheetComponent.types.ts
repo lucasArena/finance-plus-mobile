@@ -4,7 +4,7 @@ export interface IBottomSheetComponentProps {
   backgroundStyle: ViewStyle
 }
 
-export interface IBottomSheetComponentRef {
-  open: () => void
+export interface IBottomSheetComponentRef<T> {
+  open: (props: T) => void
   close: () => void
 }

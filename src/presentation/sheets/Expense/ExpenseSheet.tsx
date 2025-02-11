@@ -22,7 +22,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
   const theme = useTheme()
 
   const styles = useExpenseSheetStyles()
-  const rules = useExpenseSheetRules()
+  const rules = useExpenseSheetRules(props)
 
   const listAllExpensesTypes = useListAllExpenseTypesHook()
 
@@ -33,7 +33,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           Insira a sua despesa
         </TextComponent>
 
-        <Pressable onPress={props.onClose}>
+        <Pressable onPress={props.onClose} disabled={rules.isWaiting}>
           <CloseLogo />
         </Pressable>
       </View>
@@ -50,7 +50,10 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           options={rules.expensesTypes}
           keyExtractor="key"
           labelExtractor="name"
-          onValueChange={console.log}
+          defaultValue={rules.values.expenseTypeId}
+          onValueChange={value =>
+            rules.handleSetValue("expenseTypeId", value.key)
+          }
           label="Categoria"
           placeholder="Insira sua categoria"
           required
@@ -64,6 +67,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           placeholder="Insira sua descrição"
           required
           render={BottomSheetInputComponent}
+          defaultValue={rules.values.description}
           onChangeText={value => rules.handleSetValue("description", value)}
           error={!!rules.errors.description}
         />
@@ -73,6 +77,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           placeholder="R$00,00"
           required
           render={BottomSheetInputComponent}
+          defaultValue={rules.values.value}
           onChangeText={value => rules.handleSetValue("value", value)}
           error={!!rules.errors.value}
         />
@@ -82,23 +87,44 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           required
           placeholder="Insira a data da despesa"
           error={!!rules.errors.date}
+          defaultDate={rules.values.date}
+          onChangeDate={date => {
+            rules.handleSetValue("date", date)
+          }}
         />
 
         <View style={styles.cta}>
-          <ButtonComponent
-            variant="secondary"
-            fullWidth
-            onPress={props.onClose}>
-            Cancelar
-          </ButtonComponent>
+          <View style={{ width: "30%" }}>
+            <ButtonComponent
+              variant="error"
+              outlined={false}
+              disabled={rules.isWaiting || rules.isWaitingDelete}
+              loading={rules.isWaitingDelete}
+              onPress={rules.handleDelete}>
+              Deletar
+            </ButtonComponent>
+          </View>
 
-          <ButtonComponent
-            variant="primary"
-            fullWidth
-            disabled={rules.disableSubmit}
-            onPress={rules.handleSubmit}>
-            Salvar
-          </ButtonComponent>
+          <View
+            style={{ flex: 1, flexDirection: "row", gap: 8, maxWidth: "60%" }}>
+            <ButtonComponent
+              variant="secondary"
+              fullWidth
+              outlined={false}
+              disabled={rules.isWaiting || rules.isWaitingDelete}
+              onPress={props.onClose}>
+              Cancelar
+            </ButtonComponent>
+
+            <ButtonComponent
+              variant="primary"
+              fullWidth
+              loading={rules.isWaiting || rules.isWaitingDelete}
+              disabled={rules.disableSubmit}
+              onPress={rules.handleSubmit}>
+              Salvar
+            </ButtonComponent>
+          </View>
         </View>
       </View>
     </BottomSheetViewComponent>

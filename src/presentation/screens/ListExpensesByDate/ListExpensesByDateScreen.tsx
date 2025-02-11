@@ -16,6 +16,8 @@ import { InformationComponent } from "@/presentation/components/Information/Info
 import CheckCircleLogo from "@/presentation/assets/check-circle-logo.svg"
 import ExclamationCircleLogo from "@/presentation/assets/exclamation-circle-logo.svg"
 import { IListExpensesByDateScreenProps } from "@/presentation/screens/ListExpensesByDate/ListExpensesByDateScreen.types"
+import { BottomSheetContainerComponent } from "@/presentation/components/BottomSheet/Container/BottomSheetContainerComponent"
+import { ExpenseSheet } from "@/presentation/sheets/Expense/ExpenseSheet"
 
 export const ListExpensesByDateScreen: React.FC<
   IListExpensesByDateScreenProps
@@ -73,6 +75,7 @@ export const ListExpensesByDateScreen: React.FC<
               description={item.description}
               value={item.value}
               typeName={item.type.name}
+              onPress={() => rules.handleEdit(item)}
             />
           )}
           ItemSeparatorComponent={() => (
@@ -109,6 +112,11 @@ export const ListExpensesByDateScreen: React.FC<
           subtitle="Reinicie o aplicativo e tente novamente"
         />
       )}
+
+      <BottomSheetContainerComponent
+        ref={rules.expenseSheetRef}
+        SheetComponent={ExpenseSheet}
+      />
     </View>
   )
 }

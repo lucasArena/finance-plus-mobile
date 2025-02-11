@@ -13,5 +13,8 @@ export const useButtonComponentStyles = () => {
     disabled: {
       opacity: 0.4,
     },
+    outlined: {
+      borderWidth: 2,
+    },
   })
 }

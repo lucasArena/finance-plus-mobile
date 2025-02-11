@@ -8,17 +8,23 @@ export const useInputDateComponentRules = (props: IInputDateComponentProps) => {
   const [selected, setSelected] = useState<Date>(
     props.defaultDate ?? currentDate,
   )
-  const [selectedText, setSelectedText] = useState<string>("")
+  const [selectedText, setSelectedText] = useState<string>(
+    props.defaultDate
+      ? selected.toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          timeZone: "UTC",
+        })
+      : "",
+  )
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
   const handleToggleCalendar = () => {
-    console.log(isOpenModal)
     setIsOpenModal(!isOpenModal)
   }
 
   const handleChangeDate = (selectedDate: string) => {
-    console.log(selectedDate)
-
     const safeDate = new Date(selectedDate)
 
     setSelected(safeDate)
@@ -34,6 +40,8 @@ export const useInputDateComponentRules = (props: IInputDateComponentProps) => {
 
     setSelectedText(safeTextDate)
     handleToggleCalendar()
+
+    props.onChangeDate?.(selected)
   }
 
   return {

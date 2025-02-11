@@ -15,6 +15,7 @@ export const useExpenseSheetStyles = () => {
     },
     cta: {
       flexDirection: "row",
+      justifyContent: "space-between",
       gap: 24,
     },
   })

@@ -14,6 +14,8 @@ export const useReactHookForm = <T extends IFormFields>(
 ): IUseFormResponse<T> => {
   const form = useForm<T>({
     //@ts-ignore
+    defaultValues: props.defaultValues,
+    //@ts-ignore
     resolver: yupResolver(
       yup.object().shape({
         ...props.schema,

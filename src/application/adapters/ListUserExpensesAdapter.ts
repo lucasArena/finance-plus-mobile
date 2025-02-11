@@ -8,6 +8,7 @@ export const listUserExpensesAdapter = (rawExpenses: IExpense[]) => {
       const expenseDate = new Date(expense.date).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "short",
+        timeZone: "UTC",
       })
 
       if (!adaptExpenses[expenseDate]) {

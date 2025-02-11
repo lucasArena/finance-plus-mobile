@@ -7,4 +7,5 @@ export interface IDividerComponentProps {
   verticalSpacing?: number
   topSpacing?: number
   bottomSpacing?: number
+  fullWidth?: boolean
 }

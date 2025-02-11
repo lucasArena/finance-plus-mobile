@@ -1,7 +1,7 @@
 import { useTheme } from "@/presentation/theme/Theme"
 import React from "react"
 
-import { Pressable, SafeAreaView, View } from "react-native"
+import { Pressable, SafeAreaView, StatusBar, View } from "react-native"
 import { useHeaderDefaultComponentStyles } from "@/presentation/components/Header/Default/HeaderDefaultComponent.styles"
 import { TextComponent } from "@/presentation/components/Text/TextComponent"
 import { IHeaderDefaultComponentProps } from "@/presentation/components/Header/Default/HeaderDefaultComponent.types"
@@ -19,6 +19,7 @@ export const HeaderDefaultComponent: React.FC<
 
   return (
     <React.Fragment>
+      <StatusBar backgroundColor={theme.primary.blue} />
       <SafeAreaView style={styles.topBar} />
 
       <View style={styles.headerContainer}>

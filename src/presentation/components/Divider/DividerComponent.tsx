@@ -9,15 +9,17 @@ export const DividerComponent: React.FC<IDividerComponentProps> = props => {
 
   return (
     <View
-      style={{
-        ...styles.container,
-        marginTop: props.topSpacing,
-        marginBottom: props.bottomSpacing,
-        marginVertical: props.verticalSpacing,
-        width: props.width,
-        height: props.height,
-        backgroundColor: props.color,
-      }}
+      style={[
+        {
+          marginTop: props.topSpacing,
+          marginBottom: props.bottomSpacing,
+          marginVertical: props.verticalSpacing,
+          width: props.width,
+          height: props.height,
+          backgroundColor: props.color,
+        },
+        props.fullWidth && styles.fullWidth,
+      ]}
     />
   )
 }

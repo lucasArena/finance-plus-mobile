@@ -17,7 +17,6 @@ import { DividerComponent } from "@/presentation/components/Divider/DividerCompo
 import { CheckboxComponent } from "@/presentation/components/Checkbox/CheckboxComponent"
 import { KeyboarAvoidingViewComponent } from "@/presentation/components/KeyboardAvoidingView/KeyboardAvoidingViewComponent"
 
-import GoogleLogo from "@/presentation/assets/google-logo.svg"
 import AppleLogo from "@/presentation/assets/apple-logo.svg"
 import AppLogo from "@/presentation/assets/blue-fin-logo.svg"
 import EyeClosedLogo from "@/presentation/assets/eye-closed.svg"
@@ -116,7 +115,7 @@ export const SignInScreen = () => {
           </ButtonComponent>
 
           <View style={styles.signInVariantsDivider}>
-            <DividerComponent color={theme.white.light} height={1} />
+            <DividerComponent color={theme.white.light} height={1} fullWidth />
 
             <TextComponent
               style={styles.signInVariantsDividerText}
@@ -125,7 +124,8 @@ export const SignInScreen = () => {
               weight={600}>
               Ou entre com
             </TextComponent>
-            <DividerComponent color={theme.white.light} height={1} />
+
+            <DividerComponent color={theme.white.light} height={1} fullWidth />
           </View>
 
           <View style={styles.signInOptionsContainer}>

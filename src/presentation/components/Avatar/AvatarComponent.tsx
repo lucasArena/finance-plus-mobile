@@ -24,7 +24,7 @@ export const AvatarComponent: React.FC<IAvatarComponentProps> = props => {
             size={props.size * 0.4}
             color={theme.white.light}
             weight={600}>
-            {props.name?.charAt(0)}
+            {props.name?.toUpperCase().charAt(0)}
           </TextComponent>
         </View>
       )}

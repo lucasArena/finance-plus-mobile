@@ -3,13 +3,16 @@ import { useEffect, useRef, useState } from "react"
 import { listUserExpensesAdapter } from "@/application/adapters/ListUserExpensesAdapter"
 import { useHomeFacadeHook } from "@/presentation/hooks/UseHomeFacadeHook"
 import { IBottomSheetComponentRef } from "@/presentation/components/BottomSheet/BottomSheetComponent.types"
+import { IExpense } from "@/domain/Expense.types"
+import { IExpenseSheetProps } from "@/presentation/sheets/Expense/ExpenseSheet.types"
 
 const EXPENSES_LIMIT = 5
 const currentDate = new Date()
 
 export const useHomeScreenRules = () => {
   const [date, setDate] = useState<Date>(currentDate)
-  const createNewExpenseRef = useRef<IBottomSheetComponentRef>(null)
+  const createNewExpenseRef =
+    useRef<IBottomSheetComponentRef<IExpenseSheetProps>>(null)
 
   const homeFacadeHook = useHomeFacadeHook()
 
@@ -39,14 +42,28 @@ export const useHomeScreenRules = () => {
     setDate(new Date(selectedDate))
   }
 
-  console.log(homeFacadeHook.data?.expenses)
-
-  const handleOpenCreateNewExpenses = () => {
-    createNewExpenseRef.current?.open()
+  const handleOpenCreateNewExpenses = (expense?: IExpense) => {
+    createNewExpenseRef.current?.open({
+      onClose: handleCloseCreateNewExpenses,
+      onSubmit: () => handleAfterCreateNewExpense(),
+      ...(expense && {
+        defaultValues: {
+          key: expense.key,
+          expenseTypeId: expense.type.key,
+          description: expense.description,
+          value: expense.value,
+          date: new Date(expense.date),
+        },
+      }),
+    })
   }
 
   const handleCloseCreateNewExpenses = () => {
     createNewExpenseRef.current?.close()
+  }
+
+  const handleAfterCreateNewExpense = () => {
+    handleChangeDate(date)
   }
 
   useEffect(() => {
@@ -65,5 +82,6 @@ export const useHomeScreenRules = () => {
     handleChangeDate,
     handleOpenCreateNewExpenses,
     handleCloseCreateNewExpenses,
+    handleAfterCreateNewExpense,
   }
 }

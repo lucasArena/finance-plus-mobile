@@ -7,6 +7,7 @@ import {
 } from "@/presentation/providers/Auth/AuthProvider.types"
 import { HttpClientBase } from "@/infra/HttpClient/HttpClient"
 import { Token } from "@/application/utils/Token/Jwt/TokenJwt"
+import { Toast } from "@/presentation/providers/Toast/ToastProvider"
 
 const tokenJwt = new Token()
 
@@ -19,20 +20,34 @@ export const useAuthProvider = (props: IAuthProviderProps): IAuthContext => {
   }, [token])
 
   const signIn = async (signInToken: string) => {
-    await storage.setItem("token", signInToken)
-    setToken(signInToken)
+    try {
+      setToken(signInToken)
+      HttpClientBase.setToken(signInToken)
+      await storage.setItem("token", signInToken)
+    } catch (error) {
+      Toast({
+        type: "error",
+        text1: "Aconteceu algum erro inesperado. Tente novamente mais tarde",
+      })
+    }
   }
 
   const signOut = async () => {
-    await storage.removeItem("token")
-    setToken(null)
+    try {
+      await storage.removeItem("token")
+      setToken(null)
+    } catch (error) {
+      Toast({
+        type: "error",
+        text1: "Aconteceu algum erro inesperado. Tente novamente mais tarde",
+      })
+    }
   }
 
   useEffect(() => {
     if (!token) {
       storage.getItem("token").then(responseToken => {
         setToken(responseToken)
-
         HttpClientBase.setToken(responseToken!)
       })
     }

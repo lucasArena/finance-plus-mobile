@@ -9,8 +9,6 @@ export const useFetchHook = <TRequest, TResponse>(
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
-  console.log(isWaiting)
-
   const handleFetch = async (request: TRequest) => {
     setIsSuccess(false)
 
@@ -27,7 +25,6 @@ export const useFetchHook = <TRequest, TResponse>(
     } catch (error) {
       const safeError = error as Error
 
-      console.log(error)
       setError(safeError.message)
     } finally {
       setIsWaiting(false)

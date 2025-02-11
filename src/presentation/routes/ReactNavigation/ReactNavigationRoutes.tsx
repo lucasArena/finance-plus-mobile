@@ -1,4 +1,5 @@
 import React from "react"
+import BootSplash from "react-native-bootsplash"
 
 import { SignInScreen } from "@/presentation/screens/SignIn/SignInScreen"
 import { NavigationContainer } from "@react-navigation/native"
@@ -16,7 +17,10 @@ export const ReactNavigationRoutes: React.FC = () => {
   const isUserAutheticated = !!auth.token
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onReady={() => {
+        setTimeout(() => BootSplash.hide({ fade: true }), 1000)
+      }}>
       {isUserAutheticated ? (
         <Stack.Navigator
           screenOptions={{ headerShown: false }}

@@ -2,4 +2,5 @@ import { IInputTextComponentProps } from "@/presentation/components/Input/Text/I
 
 export interface IInputDateComponentProps extends IInputTextComponentProps {
   defaultDate?: Date
+  onChangeDate?: (date: Date) => void
 }

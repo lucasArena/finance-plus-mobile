@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity, Modal, FlatList } from "react-native"
 import { InputTextComponent } from "@/presentation/components/Input/Text/InputTextComponent"
 import { IInputSelectComponentProps } from "@/presentation/components/Input/Select/InputSelectComponent.types"
@@ -8,12 +8,13 @@ import { useInputSelectComponentStyles } from "@/presentation/components/Input/S
 import { DividerComponent } from "@/presentation/components/Divider/DividerComponent"
 import { useTheme } from "@/presentation/theme/Theme"
 
-export const InputSelectComponent = <T,>(
-  props: IInputSelectComponentProps<T>,
-) => {
+export const InputSelectComponent = <T,>({
+  defaultValue,
+  ...props
+}: IInputSelectComponentProps<T>) => {
   const theme = useTheme()
 
-  const [selected, setSelected] = useState<T | null>(null)
+  const [selected, setSelected] = useState<T | null>()
   const [modalVisible, setModalVisible] = useState(false)
 
   const styles = useInputSelectComponentStyles()
@@ -21,8 +22,20 @@ export const InputSelectComponent = <T,>(
   const handleSelect = (value: T) => {
     setSelected(value)
     props.onValueChange(value)
+
     setModalVisible(false)
   }
+
+  useEffect(() => {
+    if (defaultValue && props.options.length !== 0) {
+      const defaultOption = props.options.find(
+        option => option[props.keyExtractor] === defaultValue,
+      )
+
+      setSelected(defaultOption)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValue, props.options])
 
   return (
     <View>

@@ -8,6 +8,7 @@ import { useButtonComponentStyles } from "@/presentation/components/Button/Butto
 
 export const ButtonComponent: React.FC<IButtonProps> = ({
   fullWidth,
+  outlined = true,
   ...props
 }) => {
   const rules = useButtonComponentRules(props)
@@ -25,6 +26,7 @@ export const ButtonComponent: React.FC<IButtonProps> = ({
       style={[
         fullWidth && styles.fullWidth,
         props.disabled && styles.disabled,
+        outlined && styles.outlined,
         rules.variantStyles,
       ]}>
       <View style={styles.contentContainer}>

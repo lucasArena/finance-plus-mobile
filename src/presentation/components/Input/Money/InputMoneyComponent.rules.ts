@@ -1,10 +1,16 @@
 import { useState } from "react"
-import { IInputTextComponentProps } from "@/presentation/components/Input/Text/InputTextComponent.types"
+import { InputMoneyComponentProps } from "@/presentation/components/Input/Money/InputMoneyComponent.types"
 
 export const useInputMoneyComponentRules = (
-  props: IInputTextComponentProps,
+  props: InputMoneyComponentProps,
 ) => {
-  const [value, setValue] = useState<string>("")
+  const [value, setValue] = useState<string>(
+    props.defaultValue
+      ? Number(props.defaultValue).toLocaleString(props.locale || "pt-BR", {
+          minimumFractionDigits: 2,
+        })
+      : "",
+  )
 
   const handleChange = (text: string) => {
     const cleanText = text.replace(/[^0-9]+/g, "")
@@ -23,6 +29,7 @@ export const useInputMoneyComponentRules = (
 
     const formattedValue = Number(textNumberWithSanitazed).toLocaleString(
       props.locale || "pt-BR",
+      { minimumFractionDigits: 2 },
     )
 
     setValue(formattedValue)
