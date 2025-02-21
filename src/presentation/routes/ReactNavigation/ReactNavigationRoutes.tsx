@@ -9,6 +9,7 @@ import { HomeScreen } from "@/presentation/screens/Home/HomeScreen"
 import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 import { ProfileScreen } from "@/presentation/screens/Profile/ProfileScreen"
 import { ListExpensesByDateScreen } from "@/presentation/screens/ListExpensesByDate/ListExpensesByDateScreen"
+import { ValidateUserEmailScreen } from "@/presentation/screens/ValidateUserEmail/ValidateUserEmailScreen"
 
 export const ReactNavigationRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator()
@@ -38,6 +39,10 @@ export const ReactNavigationRoutes: React.FC = () => {
           initialRouteName="SignIn">
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen
+            name="ValidateUserEmail"
+            component={ValidateUserEmailScreen}
+          />
         </Stack.Navigator>
       )}
     </NavigationContainer>

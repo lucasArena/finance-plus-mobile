@@ -2,5 +2,5 @@ import { IInputTextComponentProps } from "@/presentation/components/Input/Text/I
 
 export interface InputMoneyComponentProps
   extends Omit<IInputTextComponentProps, "defaultValue"> {
-  defaultValue?: number
+  defaultValue?: string
 }

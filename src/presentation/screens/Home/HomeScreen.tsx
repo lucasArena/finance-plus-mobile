@@ -86,64 +86,62 @@ export const HomeScreen: React.FC = () => {
             </View>
 
             {!emptyExpenses && (
-              <CardComponent>
-                <View style={styles.cardContent}>
-                  {rules.expenses.map((sections, sectionIndex) => (
-                    <View key={`${sectionIndex}-${sections.title}`}>
-                      <View>
-                        <View style={styles.sectionTitle}>
-                          <TextComponent
-                            color={theme.white.light}
-                            size={16}
-                            weight={500}>
-                            {sections.title}
-                          </TextComponent>
-
-                          {rules.isShowMoreExpensesButtonVisable &&
-                            sectionIndex === 0 && (
-                              <Pressable
-                                onPress={() =>
-                                  navigation.handleNavigate(
-                                    "ListExpensesByDate",
-                                    {
-                                      initialDate: rules.date,
-                                    },
-                                  )
-                                }>
-                                <TextComponent
-                                  color={theme.secondary.green}
-                                  size={12}
-                                  weight={400}>
-                                  Ver tudo
-                                </TextComponent>
-                              </Pressable>
-                            )}
-                        </View>
-
-                        <DividerComponent
-                          height={1}
+              <View style={styles.cardContent}>
+                {rules.expenses.map((sections, sectionIndex) => (
+                  <View key={`${sectionIndex}-${sections.title}`}>
+                    <View>
+                      <View style={styles.sectionTitle}>
+                        <TextComponent
                           color={theme.white.light}
-                          verticalSpacing={16}
-                        />
+                          size={16}
+                          weight={500}>
+                          {sections.title}
+                        </TextComponent>
+
+                        {rules.isShowMoreExpensesButtonVisable &&
+                          sectionIndex === 0 && (
+                            <Pressable
+                              onPress={() =>
+                                navigation.handleNavigate(
+                                  "ListExpensesByDate",
+                                  {
+                                    initialDate: rules.date,
+                                  },
+                                )
+                              }>
+                              <TextComponent
+                                color={theme.secondary.green}
+                                size={12}
+                                weight={400}>
+                                Ver tudo
+                              </TextComponent>
+                            </Pressable>
+                          )}
                       </View>
 
-                      <View style={styles.expensesItem}>
-                        {sections.data.map((expense, expenseIndex) => (
-                          <ExpenseItemComponent
-                            key={`expense-item-${expenseIndex}-${expense.key}`}
-                            description={expense.description}
-                            value={expense.value}
-                            typeName={expense.type.name}
-                            onPress={() =>
-                              rules.handleOpenCreateNewExpenses(expense)
-                            }
-                          />
-                        ))}
-                      </View>
+                      <DividerComponent
+                        height={1}
+                        color={theme.white.light}
+                        verticalSpacing={16}
+                      />
                     </View>
-                  ))}
-                </View>
-              </CardComponent>
+
+                    <View style={styles.expensesItem}>
+                      {sections.data.map((expense, expenseIndex) => (
+                        <ExpenseItemComponent
+                          key={`expense-item-${expenseIndex}-${expense.key}`}
+                          description={expense.description}
+                          value={expense.value}
+                          typeName={expense.type.name}
+                          onPress={() =>
+                            rules.handleOpenCreateNewExpenses(expense)
+                          }
+                        />
+                      ))}
+                    </View>
+                  </View>
+                ))}
+              </View>
             )}
           </>
         ) : (

@@ -5,12 +5,13 @@ import {
   IExpenseForm,
   IExpenseSheetProps,
 } from "@/presentation/sheets/Expense/ExpenseSheet.types"
-import { useListAllExpenseTypesHook } from "@/presentation/hooks/UseListAllExpenseTypesHook"
+import { useListAllExpenseCategoriesHook } from "@/presentation/hooks/UseListAllExpenseCategoriesHook"
 import { useCreateExpenseHook } from "@/presentation/hooks/UseCreateExpenseHook"
 import { useEffect } from "react"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
 import { useEditExpenseHook } from "@/presentation/hooks/UseEditExpenseHook"
 import { useDeleteExpenseHook } from "@/presentation/hooks/UseDeleteExpenseHook"
+import { formatStringToFloatUtil } from "@/application/utils/FormatStringToFloat/FormatStringToFloatUtil"
 
 const defaultSchema: Record<keyof IExpenseForm, Yup.AnyObject> = {
   key: Yup.string().notRequired(),
@@ -20,21 +21,29 @@ const defaultSchema: Record<keyof IExpenseForm, Yup.AnyObject> = {
   date: Yup.date().required(),
 }
 
+const defaultValues: IExpenseForm = {
+  key: "",
+  expenseTypeId: "",
+  description: "",
+  value: "",
+  date: new Date(),
+}
+
 export const useExpenseSheetRules = (props: IExpenseSheetProps) => {
   const form = useForm<IExpenseForm>({
     schema: defaultSchema,
-    defaultValues: props.defaultValues,
+    defaultValues: props.defaultValues ?? defaultValues,
   })
 
-  const listAllExpensesTypes = useListAllExpenseTypesHook()
+  const listAllExpensesCategories = useListAllExpenseCategoriesHook()
   const createExpense = useCreateExpenseHook()
   const editExpense = useEditExpenseHook()
   const deleteExpense = useDeleteExpenseHook()
 
-  const expensesTypes = listAllExpensesTypes.data ?? []
+  const expensesTypes = listAllExpensesCategories.data ?? []
 
   const disableSubmit =
-    listAllExpensesTypes.isWaiting || createExpense.isWaiting
+    listAllExpensesCategories.isWaiting || createExpense.isWaiting
 
   const handleSubmit = (submittedValues: IExpenseForm) => {
     const formattedDate = submittedValues.date
@@ -42,18 +51,20 @@ export const useExpenseSheetRules = (props: IExpenseSheetProps) => {
       .replace("T", " ")
       .substring(0, 19)
 
+    const formattedValue = formatStringToFloatUtil(submittedValues.value)
+
     submittedValues.key
       ? editExpense.handleFetch({
           key: submittedValues.key,
           typeId: submittedValues.expenseTypeId,
           description: submittedValues.description,
-          value: submittedValues.value,
+          value: formattedValue,
           date: formattedDate,
         })
       : createExpense.handleFetch({
           typeId: submittedValues.expenseTypeId,
           description: submittedValues.description,
-          value: submittedValues.value,
+          value: formattedValue,
           date: formattedDate,
         })
   }
@@ -63,7 +74,7 @@ export const useExpenseSheetRules = (props: IExpenseSheetProps) => {
   }
 
   useEffect(() => {
-    listAllExpensesTypes.handleFetch()
+    listAllExpensesCategories.handleFetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

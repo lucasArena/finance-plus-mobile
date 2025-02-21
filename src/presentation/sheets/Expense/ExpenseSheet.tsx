@@ -15,7 +15,7 @@ import { BottomSheetInputComponent } from "@/presentation/components/BottomSheet
 import { InputMoneyComponent } from "@/presentation/components/Input/Money/InputMoneyComponent"
 import { InputTextAreaComponent } from "@/presentation/components/Input/TextArea/InputTextAreaComponent"
 import { InputSelectComponent } from "@/presentation/components/Input/Select/InputSelectComponent"
-import { useListAllExpenseTypesHook } from "@/presentation/hooks/UseListAllExpenseTypesHook"
+import { useListAllExpenseCategoriesHook } from "@/presentation/hooks/UseListAllExpenseCategoriesHook"
 import { InputDateComponent } from "@/presentation/components/Input/Date/InputDateComponent"
 
 export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
@@ -24,7 +24,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
   const styles = useExpenseSheetStyles()
   const rules = useExpenseSheetRules(props)
 
-  const listAllExpensesTypes = useListAllExpenseTypesHook()
+  const listAllExpensesCategories = useListAllExpenseCategoriesHook()
 
   return (
     <BottomSheetViewComponent style={styles.container}>
@@ -46,7 +46,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
 
       <View style={styles.form}>
         <InputSelectComponent
-          loading={listAllExpensesTypes.isWaiting}
+          loading={listAllExpensesCategories.isWaiting}
           options={rules.expensesTypes}
           keyExtractor="key"
           labelExtractor="name"

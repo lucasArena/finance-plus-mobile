@@ -11,6 +11,7 @@ declare module "react-native-config" {
   export interface NativeConfig {
     readonly ENVIRONMENT: "localhost" | "production"
     readonly FINANCE_PLUS_BASE_URL: string
+    readonly DECRYPT_KEY: string
   }
 
   export const Config: NativeConfig | NativeConfigEncrypted

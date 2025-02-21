@@ -17,6 +17,7 @@ export const useExpenseItemComponentStyles = () => {
     },
     expenseItemTextContainer: {
       gap: 8,
+      width: "60%",
     },
   })
 }

@@ -5,8 +5,9 @@ import { useForm } from "@/presentation/hooks/UseForm"
 import { useRoutes } from "@/presentation/routes"
 import { useAuthFacadeHook } from "@/presentation/hooks/UseAuthFacadeHook"
 import { ISignUpScreenForm } from "@/presentation/screens/SignUp/SignUpScreen.types"
-import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
+import { useUserSendActivationCodeHook } from "@/presentation/hooks/UserSendActivationCodeHook"
+import { Token } from "@/application/utils/Token/Jwt/TokenJwt"
 
 const schema = {
   name: yup.string().required(),
@@ -19,8 +20,9 @@ export const useSignUpRules = () => {
   const navigation = useRoutes()
   const form = useForm<ISignUpScreenForm>({ schema })
 
-  const authProvider = useAuth()
+  const token = new Token()
   const authFacade = useAuthFacadeHook()
+  const userSendActivationCodeHook = useUserSendActivationCodeHook()
 
   const handlePressNavigateToSignIn = () => {
     navigation.handleGoBack()
@@ -36,7 +38,16 @@ export const useSignUpRules = () => {
 
   useEffect(() => {
     if (authFacade.isSuccess) {
-      authProvider.signIn(authFacade.data!.token)
+      const safeToken = authFacade.data?.token!
+      const decrypted = token.decrypt(safeToken)
+      const safeUserKey = decrypted?.key || ""
+
+      userSendActivationCodeHook.handleFetch({
+        userKey: safeUserKey,
+      })
+
+      navigation.handleNavigate("ValidateUserEmail", { token: safeToken })
+      // authProvider.signIn(authFacade.data!.token)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authFacade.isSuccess])

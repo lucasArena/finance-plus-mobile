@@ -1,4 +1,4 @@
-export namespace ListAllExpenseTypesServiceNamespace {
+export namespace ListAllExpenseCategoriesServiceNamespace {
   export type TRequest = void
 
   export interface IResponse {

@@ -1,4 +1,5 @@
 import { IListExpensesByDateScreenProps } from "@/presentation/screens/ListExpensesByDate/ListExpensesByDateScreen.types"
+import { IValidateUserEmailScreenProps } from "@/presentation/screens/ValidateUserEmail/ValidateUserEmailScreen.types"
 
 export interface IRoutes {
   SignIn: void
@@ -6,6 +7,7 @@ export interface IRoutes {
   Home: void
   Profile: void
   ListExpensesByDate: IListExpensesByDateScreenProps
+  ValidateUserEmail: IValidateUserEmailScreenProps
 }
 
 export type TRouteNames = keyof IRoutes

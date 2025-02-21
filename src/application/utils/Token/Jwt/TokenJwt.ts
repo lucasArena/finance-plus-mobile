@@ -1,6 +1,8 @@
 import { jwtDecode } from "jwt-decode"
+import jwtEncode from "jwt-encode"
 
 import { IToken, ITokenDecoded } from "@/application/utils/Token/Token.types"
+import { ENV } from "../../env/Env"
 
 export class Token implements IToken {
   constructor() {}
@@ -11,5 +13,9 @@ export class Token implements IToken {
     if (!decoded) return null
 
     return decoded as ITokenDecoded
+  }
+
+  public encrypt(data: Record<string, any>): string {
+    return jwtEncode(data, ENV.DECRYPT_KEY)
   }
 }

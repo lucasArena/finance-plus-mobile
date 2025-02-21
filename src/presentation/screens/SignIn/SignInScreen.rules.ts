@@ -7,6 +7,8 @@ import { ISignInScreenForm } from "@/presentation/screens/SignIn/SignInScreen.ty
 import { useUserSignInHook } from "@/presentation/hooks/UseUserSignInHook"
 import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
+import { Token } from "@/application/utils/Token/Jwt/TokenJwt"
+import { useUserSendActivationCodeHook } from "@/presentation/hooks/UserSendActivationCodeHook"
 
 const schema = {
   email: yup.string().email().required(),
@@ -20,6 +22,9 @@ export const useSignInScreenRules = () => {
   const form = useForm<ISignInScreenForm>({ schema })
   const auth = useAuth()
 
+  const token = new Token()
+
+  const userSendActivationCodeHook = useUserSendActivationCodeHook()
   const userSignIn = useUserSignInHook()
 
   const handlePressSignUp = () => {
@@ -32,6 +37,19 @@ export const useSignInScreenRules = () => {
 
   useEffect(() => {
     if (userSignIn.isSuccess) {
+      const safeToken = userSignIn.data?.token!
+      const decrypted = token.decrypt(safeToken)
+      const safeUserKey = decrypted?.key || ""
+
+      if (!decrypted?.activatedAt) {
+        userSendActivationCodeHook.handleFetch({
+          userKey: safeUserKey,
+        })
+        return navigation.handleNavigate("ValidateUserEmail", {
+          token: safeToken,
+        })
+      }
+
       auth.signIn(userSignIn.data!.token)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

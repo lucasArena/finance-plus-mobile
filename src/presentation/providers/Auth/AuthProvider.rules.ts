@@ -32,6 +32,25 @@ export const useAuthProvider = (props: IAuthProviderProps): IAuthContext => {
     }
   }
 
+  const activateUser = async () => {
+    try {
+      const encryptedToken = tokenJwt.encrypt({
+        ...tokenDecrypted,
+        activatedAt: new Date(),
+      })
+
+      setToken(encryptedToken)
+      await storage.setItem("token", encryptedToken)
+    } catch (error) {
+      console.log(error)
+
+      Toast({
+        type: "error",
+        text1: "Aconteceu algum erro inesperado. Tente novamente mais tarde",
+      })
+    }
+  }
+
   const signOut = async () => {
     try {
       await storage.removeItem("token")
@@ -54,5 +73,5 @@ export const useAuthProvider = (props: IAuthProviderProps): IAuthContext => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { token, tokenDecrypted, signIn, signOut }
+  return { token, tokenDecrypted, signIn, activateUser, signOut }
 }

@@ -4,13 +4,13 @@ import { useBottomSheetContainerComponentStyles } from "@/presentation/component
 import { IBottomSheetContainerComponentProps } from "@/presentation/components/BottomSheet/Container/BottomSheetContainerComponent.types"
 
 export const BottomSheetContainerComponent = forwardRef(
-  <T,>(props: IBottomSheetContainerComponentProps<T>, ref: any) => {
+  <T,>(props: IBottomSheetContainerComponentProps<any>, ref: any) => {
     const styles = useBottomSheetContainerComponentStyles()
 
     const bottomSheetRef = useRef<BottomSheetModal>(null)
 
     useImperativeHandle(ref, () => ({
-      open: (data: any) => {
+      open: (data: T) => {
         bottomSheetRef.current?.present(data)
       },
       close: () => {

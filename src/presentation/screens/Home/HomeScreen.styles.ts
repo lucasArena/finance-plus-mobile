@@ -11,7 +11,8 @@ export const useHomeScreenStyles = () => {
     },
     content: {
       backgroundColor: theme.black.main,
-      padding: 24,
+      padding: 16,
+      paddingBottom: 100,
       gap: 24,
     },
     chartContainer: {
