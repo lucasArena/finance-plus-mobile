@@ -1,8 +1,8 @@
 import { HttpClientAxios } from "@/infra/HttpClient/HttpClientAxios"
 import { ENV } from "@/application/utils/env/Env"
 
-export const makeHttpClientFinancePlusFactory = () => {
+export const makeHttpClientBluefinFactory = () => {
   return new HttpClientAxios({
-    baseUrl: ENV.FINANCE_PLUS_BASE_URL,
+    baseUrl: ENV.BLUEFIN_BASE_URL,
   })
 }

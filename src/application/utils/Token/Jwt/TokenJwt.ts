@@ -2,7 +2,7 @@ import { jwtDecode } from "jwt-decode"
 import jwtEncode from "jwt-encode"
 
 import { IToken, ITokenDecoded } from "@/application/utils/Token/Token.types"
-import { ENV } from "../../env/Env"
+import { ENV } from "@/application/utils/env/Env"
 
 export class Token implements IToken {
   constructor() {}

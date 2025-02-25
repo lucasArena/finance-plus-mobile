@@ -6,7 +6,7 @@ import { useRoutes } from "@/presentation/routes"
 import { useAuthFacadeHook } from "@/presentation/hooks/UseAuthFacadeHook"
 import { ISignUpScreenForm } from "@/presentation/screens/SignUp/SignUpScreen.types"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
-import { useUserSendActivationCodeHook } from "@/presentation/hooks/UserSendActivationCodeHook"
+import { useSendUserCodeEmailHook } from "@/presentation/hooks/UseSendUserCodeEmailHook"
 import { Token } from "@/application/utils/Token/Jwt/TokenJwt"
 
 const schema = {
@@ -22,7 +22,7 @@ export const useSignUpRules = () => {
 
   const token = new Token()
   const authFacade = useAuthFacadeHook()
-  const userSendActivationCodeHook = useUserSendActivationCodeHook()
+  const userSendActivationCodeHook = useSendUserCodeEmailHook()
 
   const handlePressNavigateToSignIn = () => {
     navigation.handleGoBack()

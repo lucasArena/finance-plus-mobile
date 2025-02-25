@@ -8,7 +8,7 @@ import { useUserSignInHook } from "@/presentation/hooks/UseUserSignInHook"
 import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
 import { Token } from "@/application/utils/Token/Jwt/TokenJwt"
-import { useUserSendActivationCodeHook } from "@/presentation/hooks/UserSendActivationCodeHook"
+import { useSendUserCodeEmailHook } from "@/presentation/hooks/UseSendUserCodeEmailHook"
 
 const schema = {
   email: yup.string().email().required(),
@@ -24,11 +24,15 @@ export const useSignInScreenRules = () => {
 
   const token = new Token()
 
-  const userSendActivationCodeHook = useUserSendActivationCodeHook()
+  const userSendActivationCodeHook = useSendUserCodeEmailHook()
   const userSignIn = useUserSignInHook()
 
   const handlePressSignUp = () => {
     navigation.handleNavigate("SignUp")
+  }
+
+  const handlePressRecoverPassword = () => {
+    navigation.handleNavigate("ForgetPasswordEmail")
   }
 
   const handleSignIn = (fields: ISignInScreenForm) => {
@@ -68,8 +72,9 @@ export const useSignInScreenRules = () => {
     isWaiting: userSignIn.isWaiting,
     values: form.values,
     errors: form.errors,
+    handleSubmit: form.handleSubmit(handleSignIn),
     handleSetValue: form.handleSetValue,
     handlePressSignUp,
-    handleSubmit: form.handleSubmit(handleSignIn),
+    handlePressRecoverPassword,
   }
 }

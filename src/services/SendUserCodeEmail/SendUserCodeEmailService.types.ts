@@ -1,4 +1,4 @@
-export namespace UserSendActivationCodeServiceNamespace {
+export namespace SendUserCodeEmailServiceNamespace {
   export interface IRequest {
     userKey: string
   }

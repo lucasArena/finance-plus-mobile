@@ -1,4 +1,4 @@
-package com.financeplusmobile
+package com.bluefin
 
 import android.app.Application
 import com.facebook.react.PackageList

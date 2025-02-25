@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
-import { useUserSendActivationCodeHook } from "@/presentation/hooks/UserSendActivationCodeHook"
-import { useUserValidateActivationCodeHook } from "@/presentation/hooks/UserValidateActivationCodeHook"
+import { useSendUserCodeEmailHook } from "@/presentation/hooks/UseSendUserCodeEmailHook"
+import { useValidateUserCodeEmailHook } from "@/presentation/hooks/UseValidateUserCodeEmailHook"
 import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
 import { useRoutes } from "@/presentation/routes"
@@ -16,8 +16,8 @@ export const useValidateUserEmailScreenRules = () => {
   const params = navigation.getRouteParams("ValidateUserEmail")
 
   const auth = useAuth()
-  const userSendActivationCodeHook = useUserSendActivationCodeHook()
-  const userValidateActivationCodeHook = useUserValidateActivationCodeHook()
+  const userSendActivationCodeHook = useSendUserCodeEmailHook()
+  const userValidateActivationCodeHook = useValidateUserCodeEmailHook()
 
   const tokenDecrypted = token.decrypt(params!.token)
   const userKey = tokenDecrypted?.key || ""

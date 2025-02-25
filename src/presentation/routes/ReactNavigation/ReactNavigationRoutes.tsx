@@ -10,6 +10,9 @@ import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 import { ProfileScreen } from "@/presentation/screens/Profile/ProfileScreen"
 import { ListExpensesByDateScreen } from "@/presentation/screens/ListExpensesByDate/ListExpensesByDateScreen"
 import { ValidateUserEmailScreen } from "@/presentation/screens/ValidateUserEmail/ValidateUserEmailScreen"
+import { ForgetPasswordEmailScreen } from "@/presentation/screens/ForgetPassword/Email/ForgetPasswordEmailScreen"
+import { ForgetPasswordValidationCodeScreen } from "@/presentation/screens/ForgetPassword/ValidationCode/ForgetPasswordValidationCode"
+import { ForgetPasswordConfirmationScreen } from "@/presentation/screens/ForgetPassword/Confirmation/ForgetPasswordConfirmationScreen"
 
 export const ReactNavigationRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator()
@@ -42,6 +45,18 @@ export const ReactNavigationRoutes: React.FC = () => {
           <Stack.Screen
             name="ValidateUserEmail"
             component={ValidateUserEmailScreen}
+          />
+          <Stack.Screen
+            name="ForgetPasswordEmail"
+            component={ForgetPasswordEmailScreen}
+          />
+          <Stack.Screen
+            name="ForgetPasswordValidationCode"
+            component={ForgetPasswordValidationCodeScreen}
+          />
+          <Stack.Screen
+            name="ForgetPasswordConfirmation"
+            component={ForgetPasswordConfirmationScreen}
           />
         </Stack.Navigator>
       )}

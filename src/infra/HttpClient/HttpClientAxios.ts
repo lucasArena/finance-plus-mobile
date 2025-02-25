@@ -49,6 +49,11 @@ export class HttpClientAxios extends HttpClientBase {
     return response.data
   }
 
+  async patch<T>(url: string, data?: unknown): Promise<T> {
+    const response = await this.axiosInstance.patch<T>(url, data)
+    return response.data
+  }
+
   async delete<T>(url: string): Promise<T> {
     const response = await this.axiosInstance.delete<T>(url)
     return response.data

@@ -102,7 +102,8 @@ export const SignInScreen = () => {
               color={theme.white.light}
               size={10}
               weight={600}
-              underlined>
+              underlined
+              onPress={() => rules.handlePressRecoverPassword()}>
               Esqueci minha senha
             </TextComponent>
           </View>

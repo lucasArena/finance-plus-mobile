@@ -77,6 +77,7 @@ export const SignUpScreen = () => {
               }
               value={rules.values.password}
               error={!!rules.errors.password}
+              disabled={rules.isWaiting}
               helperText={rules.errors.email?.password}
               onChangeText={value => rules.handleSetValue("password", value)}
             />

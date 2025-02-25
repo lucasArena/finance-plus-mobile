@@ -1,7 +1,7 @@
 import React from "react"
 
 import { View } from "react-native"
-import { useValidateUserEmailScreenRules } from "./ValidateUserEmailScreen.rules"
+import { useValidateUserEmailScreenRules } from "@/presentation/screens/ValidateUserEmail/ValidateUserEmailScreen.rules"
 import { ButtonComponent } from "@/presentation/components/Button/ButtonComponent"
 import { useValidateUserEmailScreenStyles } from "@/presentation/screens/ValidateUserEmail/ValidateUserEmailScreen.styles"
 import { HeaderDefaultComponent } from "@/presentation/components/Header/Default/HeaderDefaultComponent"
