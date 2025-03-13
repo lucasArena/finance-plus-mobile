@@ -1,6 +1,9 @@
+import { useTheme } from "@/presentation/theme/Theme"
 import { StyleSheet } from "react-native"
 
 export const useInputSelectComponentStyles = () => {
+  const theme = useTheme()
+
   return StyleSheet.create({
     container: {
       margin: 10,
@@ -22,13 +25,12 @@ export const useInputSelectComponentStyles = () => {
     },
     modalContent: {
       width: "80%",
-      backgroundColor: "white",
+      backgroundColor: theme.black.main,
+
       borderRadius: 10,
       padding: 20,
     },
-    option: {
-      padding: 10,
-    },
+
     optionText: {
       fontSize: 16,
     },

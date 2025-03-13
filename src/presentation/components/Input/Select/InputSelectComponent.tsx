@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect, useState } from "react"
-import { View, Text, TouchableOpacity, Modal, FlatList } from "react-native"
+import { View, TouchableOpacity, Modal, FlatList } from "react-native"
 import { InputTextComponent } from "@/presentation/components/Input/Text/InputTextComponent"
 import { IInputSelectComponentProps } from "@/presentation/components/Input/Select/InputSelectComponent.types"
 import { ButtonComponent } from "@/presentation/components/Button/ButtonComponent"
 import { useInputSelectComponentStyles } from "@/presentation/components/Input/Select/InputSelectComponent.styles"
 import { DividerComponent } from "@/presentation/components/Divider/DividerComponent"
 import { useTheme } from "@/presentation/theme/Theme"
+import { TextComponent } from "@/presentation/components/Text/TextComponent"
 
 export const InputSelectComponent = <T,>({
   defaultValue,
@@ -52,25 +53,56 @@ export const InputSelectComponent = <T,>({
             <FlatList
               data={props.options}
               keyExtractor={item => item[props.keyExtractor] as string}
+              ListHeaderComponent={() => (
+                <>
+                  <TextComponent
+                    color={theme.white.light}
+                    size={20}
+                    weight={700}
+                    style={styles.optionText}>
+                    Selecione a categoria
+                  </TextComponent>
+
+                  <DividerComponent
+                    height={1}
+                    color={theme.tertiary.grey}
+                    verticalSpacing={8}
+                  />
+                </>
+              )}
               ItemSeparatorComponent={() => (
-                <DividerComponent height={1} color={theme.tertiary.grey} />
+                <DividerComponent
+                  height={1}
+                  color={theme.tertiary.grey}
+                  verticalSpacing={10}
+                />
               )}
               renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.option}
-                  onPress={() => handleSelect(item)}>
-                  <Text style={styles.optionText}>
+                <TouchableOpacity onPress={() => handleSelect(item)}>
+                  <TextComponent
+                    color={theme.white.light}
+                    size={18}
+                    weight={500}
+                    style={styles.optionText}>
                     {item[props.labelExtractor] as string}
-                  </Text>
+                  </TextComponent>
                 </TouchableOpacity>
               )}
             />
 
-            <ButtonComponent
-              variant="primary"
-              onPress={() => setModalVisible(false)}>
-              Close
-            </ButtonComponent>
+            <View>
+              <DividerComponent
+                height={1}
+                color={theme.tertiary.grey}
+                verticalSpacing={10}
+              />
+
+              <ButtonComponent
+                variant="primary"
+                onPress={() => setModalVisible(false)}>
+                Cancelar
+              </ButtonComponent>
+            </View>
           </View>
         </View>
       </Modal>

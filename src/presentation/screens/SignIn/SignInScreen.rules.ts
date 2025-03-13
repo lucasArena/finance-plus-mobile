@@ -9,6 +9,7 @@ import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
 import { Token } from "@/application/utils/Token/Jwt/TokenJwt"
 import { useSendUserCodeEmailHook } from "@/presentation/hooks/UseSendUserCodeEmailHook"
+import AppleSignIn from "@invertase/react-native-apple-authentication"
 
 const schema = {
   email: yup.string().email().required(),
@@ -37,6 +38,31 @@ export const useSignInScreenRules = () => {
 
   const handleSignIn = (fields: ISignInScreenForm) => {
     userSignIn.handleFetch({ email: fields.email, password: fields.password })
+  }
+
+  const handleAppleSignIn = async () => {
+    console.log("ENTROU")
+    // performs login request
+    try {
+      const appleAuthRequestResponse = await AppleSignIn.performRequest({
+        requestedOperation: AppleSignIn.Operation.LOGIN,
+        // Note: it appears putting FULL_NAME first is important, see issue #293
+        requestedScopes: [AppleSignIn.Scope.FULL_NAME, AppleSignIn.Scope.EMAIL],
+      })
+
+      // get current authentication state for user
+      // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+      const credentialState = await AppleSignIn.getCredentialStateForUser(
+        appleAuthRequestResponse.user,
+      )
+
+      // use credentialState response to ensure the user is authenticated
+      if (credentialState === AppleSignIn.State.AUTHORIZED) {
+        appleAuthRequestResponse.user
+      }
+    } catch (error) {
+      console.log("error", error)
+    }
   }
 
   useEffect(() => {
@@ -73,6 +99,7 @@ export const useSignInScreenRules = () => {
     values: form.values,
     errors: form.errors,
     handleSubmit: form.handleSubmit(handleSignIn),
+    handleAppleSignIn,
     handleSetValue: form.handleSetValue,
     handlePressSignUp,
     handlePressRecoverPassword,

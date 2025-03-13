@@ -135,7 +135,8 @@ export const SignInScreen = () => {
                 variant="secondary"
                 fullWidth
                 disabled={rules.isWaiting}
-                startIcon={<AppleLogo />}>
+                startIcon={<AppleLogo />}
+                onPress={() => rules.handleAppleSignIn()}>
                 Apple
               </ButtonComponent>
             )}

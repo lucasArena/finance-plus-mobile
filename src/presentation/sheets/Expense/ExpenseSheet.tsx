@@ -1,22 +1,22 @@
 import React from "react"
 import { Pressable, View } from "react-native"
 
-import { BottomSheetViewComponent } from "@/presentation/components/BottomSheet/View/BottomSheetViewComponent"
-import { useExpenseSheetStyles } from "@/presentation/sheets/Expense/ExpenseSheet.styles"
 import { TextComponent } from "@/presentation/components/Text/TextComponent"
+import { useExpenseSheetStyles } from "@/presentation/sheets/Expense/ExpenseSheet.styles"
+import { BottomSheetViewComponent } from "@/presentation/components/BottomSheet/View/BottomSheetViewComponent"
 
-import CloseLogo from "@/presentation/assets/close-logo.svg"
 import { useTheme } from "@/presentation/theme/Theme"
-import { DividerComponent } from "@/presentation/components/Divider/DividerComponent"
+import CloseLogo from "@/presentation/assets/close-logo.svg"
 import { ButtonComponent } from "@/presentation/components/Button/ButtonComponent"
+import { DividerComponent } from "@/presentation/components/Divider/DividerComponent"
 import { IExpenseSheetProps } from "@/presentation/sheets/Expense/ExpenseSheet.types"
 import { useExpenseSheetRules } from "@/presentation/sheets/Expense/ExpenseSheet.rules"
-import { BottomSheetInputComponent } from "@/presentation/components/BottomSheet/Input/BottomSheetInputComponent"
+import { InputDateComponent } from "@/presentation/components/Input/Date/InputDateComponent"
 import { InputMoneyComponent } from "@/presentation/components/Input/Money/InputMoneyComponent"
-import { InputTextAreaComponent } from "@/presentation/components/Input/TextArea/InputTextAreaComponent"
 import { InputSelectComponent } from "@/presentation/components/Input/Select/InputSelectComponent"
 import { useListAllExpenseCategoriesHook } from "@/presentation/hooks/UseListAllExpenseCategoriesHook"
-import { InputDateComponent } from "@/presentation/components/Input/Date/InputDateComponent"
+import { InputTextAreaComponent } from "@/presentation/components/Input/TextArea/InputTextAreaComponent"
+import { BottomSheetInputComponent } from "@/presentation/components/BottomSheet/Input/BottomSheetInputComponent"
 
 export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
   const theme = useTheme()
@@ -45,6 +45,17 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
       />
 
       <View style={styles.form}>
+        <InputDateComponent
+          label="Data"
+          required
+          placeholder="Insira a data da despesa"
+          error={!!rules.errors.date}
+          defaultDate={rules.values.date}
+          onChangeDate={date => {
+            rules.handleSetValue("date", date)
+          }}
+        />
+
         <InputSelectComponent
           loading={listAllExpensesCategories.isWaiting}
           options={rules.expensesTypes}
@@ -61,6 +72,16 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           error={!!rules.errors.expenseTypeId}
         />
 
+        <InputMoneyComponent
+          label="Valor gasto"
+          placeholder="R$00,00"
+          required
+          render={BottomSheetInputComponent}
+          defaultValue={rules.values.value}
+          onChangeText={value => rules.handleSetValue("value", value)}
+          error={!!rules.errors.value}
+        />
+
         <InputTextAreaComponent
           label="Descrição"
           autoCapitalize="none"
@@ -72,41 +93,21 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           error={!!rules.errors.description}
         />
 
-        <InputMoneyComponent
-          label="Valor gasto"
-          placeholder="R$00,00"
-          required
-          render={BottomSheetInputComponent}
-          defaultValue={rules.values.value}
-          onChangeText={value => rules.handleSetValue("value", value)}
-          error={!!rules.errors.value}
-        />
-
-        <InputDateComponent
-          label="Data"
-          required
-          placeholder="Insira a data da despesa"
-          error={!!rules.errors.date}
-          defaultDate={rules.values.date}
-          onChangeDate={date => {
-            rules.handleSetValue("date", date)
-          }}
-        />
-
         <View style={styles.cta}>
-          <View style={{ width: "30%" }}>
-            <ButtonComponent
-              variant="error"
-              outlined={false}
-              disabled={rules.isWaiting || rules.isWaitingDelete}
-              loading={rules.isWaitingDelete}
-              onPress={rules.handleDelete}>
-              Deletar
-            </ButtonComponent>
-          </View>
+          {props.defaultValues?.key && (
+            <View style={styles.ctaDeleteContainer}>
+              <ButtonComponent
+                variant="error"
+                outlined={false}
+                disabled={rules.isWaiting || rules.isWaitingDelete}
+                loading={rules.isWaitingDelete}
+                onPress={rules.handleDelete}>
+                Deletar
+              </ButtonComponent>
+            </View>
+          )}
 
-          <View
-            style={{ flex: 1, flexDirection: "row", gap: 8, maxWidth: "60%" }}>
+          <View style={styles.ctaCommonContainer}>
             <ButtonComponent
               variant="secondary"
               fullWidth

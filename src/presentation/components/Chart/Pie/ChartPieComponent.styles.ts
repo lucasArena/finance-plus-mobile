@@ -14,6 +14,7 @@ export const useChartPieComponentStyles = () => {
       flexWrap: "wrap",
       justifyContent: "space-between",
       gap: 12,
+      flex: 1,
     },
     legendItem: {
       gap: 8,
@@ -26,7 +27,9 @@ export const useChartPieComponentStyles = () => {
       height: 8,
     },
     legendItemTextContainer: {
+      flex: 1,
       flexDirection: "row",
+      justifyContent: "space-between",
     },
   })
 }

@@ -50,9 +50,7 @@ export const ChartPieComponent: React.FC<IChartPieComponentProps> = props => {
                 <TextComponent size={10} color={theme.white.light} weight={400}>
                   {data.label}
                 </TextComponent>
-                <TextComponent size={10} color={theme.white.light} weight={400}>
-                  _ _ _ _ _ _
-                </TextComponent>
+
                 <TextComponent size={10} color={theme.white.light} weight={400}>
                   {data.percentage}%
                 </TextComponent>

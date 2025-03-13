@@ -1,3 +1,3 @@
 export interface IListExpensesByDateScreenProps {
-  initialDate: Date
+  initialDate: string
 }

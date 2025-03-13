@@ -7,7 +7,7 @@ export interface IExpenseSheetProps {
 export interface IExpenseForm {
   expenseTypeId: string
   description: string
-  value: string
+  value: number
   date: Date
   key: string
 }

@@ -42,7 +42,7 @@ export const HomeScreen: React.FC = () => {
         title={`Olá, ${auth.tokenDecrypted?.name.split(" ")[0]}`}
         right={
           <Pressable onPress={() => navigation.handleNavigate("Profile")}>
-            <AvatarComponent size={40} name="Lucas Arena" />
+            <AvatarComponent size={40} name={auth.tokenDecrypted?.name} />
           </Pressable>
         }
       />
@@ -105,7 +105,7 @@ export const HomeScreen: React.FC = () => {
                                 navigation.handleNavigate(
                                   "ListExpensesByDate",
                                   {
-                                    initialDate: rules.date,
+                                    initialDate: rules.date.toISOString(),
                                   },
                                 )
                               }>

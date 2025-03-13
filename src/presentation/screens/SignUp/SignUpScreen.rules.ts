@@ -6,8 +6,6 @@ import { useRoutes } from "@/presentation/routes"
 import { useAuthFacadeHook } from "@/presentation/hooks/UseAuthFacadeHook"
 import { ISignUpScreenForm } from "@/presentation/screens/SignUp/SignUpScreen.types"
 import { Toast } from "@/presentation/providers/Toast/ToastProvider"
-import { useSendUserCodeEmailHook } from "@/presentation/hooks/UseSendUserCodeEmailHook"
-import { Token } from "@/application/utils/Token/Jwt/TokenJwt"
 
 const schema = {
   name: yup.string().required(),
@@ -20,9 +18,7 @@ export const useSignUpRules = () => {
   const navigation = useRoutes()
   const form = useForm<ISignUpScreenForm>({ schema })
 
-  const token = new Token()
   const authFacade = useAuthFacadeHook()
-  const userSendActivationCodeHook = useSendUserCodeEmailHook()
 
   const handlePressNavigateToSignIn = () => {
     navigation.handleGoBack()
@@ -39,15 +35,8 @@ export const useSignUpRules = () => {
   useEffect(() => {
     if (authFacade.isSuccess) {
       const safeToken = authFacade.data?.token!
-      const decrypted = token.decrypt(safeToken)
-      const safeUserKey = decrypted?.key || ""
-
-      userSendActivationCodeHook.handleFetch({
-        userKey: safeUserKey,
-      })
 
       navigation.handleNavigate("ValidateUserEmail", { token: safeToken })
-      // authProvider.signIn(authFacade.data!.token)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authFacade.isSuccess])

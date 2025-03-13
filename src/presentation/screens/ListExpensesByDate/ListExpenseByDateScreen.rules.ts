@@ -11,7 +11,9 @@ export const useListExpensesByDateRules = () => {
   const navigation = useRoutes()
   const routeParams = navigation.getRouteParams("ListExpensesByDate")
 
-  const [date, setDate] = useState<Date>(routeParams?.initialDate ?? new Date())
+  const [date, setDate] = useState<Date>(
+    routeParams?.initialDate ? new Date(routeParams?.initialDate) : new Date(),
+  )
 
   const expenseSheetRef =
     useRef<IBottomSheetComponentRef<IExpenseSheetProps>>(null)

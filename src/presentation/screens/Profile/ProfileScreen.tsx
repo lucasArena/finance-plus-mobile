@@ -9,12 +9,14 @@ import { TextComponent } from "@/presentation/components/Text/TextComponent"
 import { useTheme } from "@/presentation/theme/Theme"
 
 import ExitLogo from "@/presentation/assets/exit-logo.svg"
+import { useAuth } from "@/presentation/providers/Auth/AuthProvider"
 
 export const ProfileScreen: React.FC = () => {
   const rules = useProfileScreenRules()
   const styles = useProfileScreenStyles()
 
   const theme = useTheme()
+  const auth = useAuth()
 
   return (
     <View style={styles.container}>
@@ -23,9 +25,9 @@ export const ProfileScreen: React.FC = () => {
       <View style={styles.content}>
         <View style={styles.card}>
           <View style={styles.profileInfo}>
-            <AvatarComponent size={100} name="Lucas Arena" />
+            <AvatarComponent size={100} name={auth.tokenDecrypted?.name} />
             <TextComponent color={theme.white.light} size={18} weight={500}>
-              Lucas Arena
+              {auth.tokenDecrypted?.name}
             </TextComponent>
           </View>
 
