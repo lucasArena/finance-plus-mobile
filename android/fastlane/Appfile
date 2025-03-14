@@ -1,0 +1,2 @@
+json_key_file("/tmp/google-play-service-account.json")  # This should match the path used in your GitHub Actions workflow
+package_name("com.bluefin") # e.g. com.krausefx.app

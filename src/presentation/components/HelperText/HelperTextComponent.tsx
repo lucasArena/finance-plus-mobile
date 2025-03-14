@@ -1,3 +1,5 @@
+import React from "react"
+
 import { HelperText } from "react-native-paper"
 import { THelperTextComponentProps } from "@/presentation/components/HelperText/HelperTextComponent.types"
 
