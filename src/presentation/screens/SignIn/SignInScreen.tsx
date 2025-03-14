@@ -1,10 +1,5 @@
 import React from "react"
-import {
-  Platform,
-  Pressable,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native"
+import { Platform, TouchableWithoutFeedback, View } from "react-native"
 
 import { ButtonComponent } from "@/presentation/components/Button/ButtonComponent"
 import { useSignInScreenRules } from "@/presentation/screens/SignIn/SignInScreen.rules"
@@ -14,7 +9,6 @@ import { useSignInScreenStyles } from "@/presentation/screens/SignIn/SignInScree
 import { TextComponent } from "@/presentation/components/Text/TextComponent"
 import { useTheme } from "@/presentation/theme/Theme"
 import { DividerComponent } from "@/presentation/components/Divider/DividerComponent"
-import { CheckboxComponent } from "@/presentation/components/Checkbox/CheckboxComponent"
 import { KeyboarAvoidingViewComponent } from "@/presentation/components/KeyboardAvoidingView/KeyboardAvoidingViewComponent"
 
 import AppleLogo from "@/presentation/assets/apple-logo.svg"
@@ -78,26 +72,6 @@ export const SignInScreen = () => {
           />
 
           <View style={styles.signInAdditionalsContainer}>
-            <Pressable
-              onPress={() => {
-                rules.handleSetValue("rememberMe", !rules.values.rememberMe)
-              }}>
-              <View style={styles.rememberMeContainer}>
-                <CheckboxComponent
-                  value={rules.values.rememberMe}
-                  style={styles.rememberMeCheckbox}
-                  boxType="square"
-                  onCheckColor={theme.black.main}
-                  onFillColor={theme.secondary.green}
-                  onTintColor={theme.white.light}
-                />
-
-                <TextComponent color={theme.white.light} size={10} weight={400}>
-                  Lembrar de mim
-                </TextComponent>
-              </View>
-            </Pressable>
-
             <TextComponent
               color={theme.white.light}
               size={10}

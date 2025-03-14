@@ -1,5 +1,5 @@
 import React from "react"
-import { Pressable, View } from "react-native"
+import { Platform, Pressable, View } from "react-native"
 
 import { TextComponent } from "@/presentation/components/Text/TextComponent"
 import { useExpenseSheetStyles } from "@/presentation/sheets/Expense/ExpenseSheet.styles"
@@ -25,6 +25,9 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
   const rules = useExpenseSheetRules(props)
 
   const listAllExpensesCategories = useListAllExpenseCategoriesHook()
+
+  const inputBottomSheetRender =
+    Platform.OS === "ios" ? BottomSheetInputComponent : undefined
 
   return (
     <BottomSheetViewComponent style={styles.container}>
@@ -68,7 +71,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           label="Categoria"
           placeholder="Insira sua categoria"
           required
-          render={BottomSheetInputComponent}
+          render={inputBottomSheetRender}
           error={!!rules.errors.expenseTypeId}
         />
 
@@ -76,7 +79,7 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
           label="Valor gasto"
           placeholder="R$00,00"
           required
-          render={BottomSheetInputComponent}
+          render={inputBottomSheetRender}
           defaultValue={rules.values.value}
           onChangeText={value => rules.handleSetValue("value", value)}
           error={!!rules.errors.value}
@@ -85,12 +88,12 @@ export const ExpenseSheet: React.FC<IExpenseSheetProps> = props => {
         <InputTextAreaComponent
           label="Descrição"
           autoCapitalize="none"
-          placeholder="Insira sua descrição"
-          required
-          render={BottomSheetInputComponent}
+          placeholder="Insira sua descrição (Máximo de 50 caracteres)"
+          render={inputBottomSheetRender}
           defaultValue={rules.values.description}
           onChangeText={value => rules.handleSetValue("description", value)}
           error={!!rules.errors.description}
+          maxLength={50}
         />
 
         <View style={styles.cta}>

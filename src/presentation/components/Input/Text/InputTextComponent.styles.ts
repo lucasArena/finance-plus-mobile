@@ -13,7 +13,8 @@ export const useInputTextComponentStyles = () => {
       borderWidth: 2,
       borderColor: theme.white.light,
       paddingHorizontal: 34,
-      paddingVertical: 16,
+      paddingVertical: 0,
+      height: 48,
     },
     input: {
       color: theme.white.light,

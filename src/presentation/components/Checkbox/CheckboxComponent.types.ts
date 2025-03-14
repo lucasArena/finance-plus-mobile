@@ -1,3 +1,3 @@
-import { CheckBoxProps } from "@react-native-community/checkbox"
+import { BouncyCheckboxProps } from "react-native-bouncy-checkbox"
 
-export type TCheckboxComponentProps = CheckBoxProps
+export type TCheckboxComponentProps = BouncyCheckboxProps

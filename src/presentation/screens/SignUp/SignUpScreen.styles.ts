@@ -20,6 +20,10 @@ export const useSignUpScreenStyles = () => {
     formContainer: {
       gap: 16,
     },
+    policyAndTermsContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
     alreadyHaveAccountContainer: {
       alignItems: "center",
     },

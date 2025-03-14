@@ -6,6 +6,7 @@ import { IForgetPasswordConfirmationProps } from "@/presentation/screens/ForgetP
 export interface IRoutes {
   SignIn: void
   SignUp: void
+  PolicyAndTerms: void
   ForgetPasswordEmail: void
   ForgetPasswordValidationCode: IForgetPasswordValidationCodeProps
   ForgetPasswordConfirmation: IForgetPasswordConfirmationProps

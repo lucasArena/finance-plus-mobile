@@ -10,7 +10,7 @@ export const useChartComponentRules = (props: IChartPieComponentProps) => {
   const formattedData = props.data.map(data => ({
     label: data.label,
     value: data.value,
-    color: randomColorUtil(),
+    color: data.color ?? randomColorUtil(),
     percentage: Math.round((data.value / total) * 100),
     show: true,
   }))

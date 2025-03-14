@@ -7,6 +7,7 @@ export namespace ListUserExpensesGroupedServiceNamespace {
   export interface IResponse {
     typeId: string
     name: string
+    color: string
     total: number
   }
 }

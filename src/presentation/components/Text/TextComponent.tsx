@@ -12,6 +12,7 @@ export const TextComponent: React.FC<ITextProps> = ({
   weight,
   underlined,
   style,
+  width,
   ...props
 }) => {
   const styles = useTextComponentStyles()
@@ -22,7 +23,7 @@ export const TextComponent: React.FC<ITextProps> = ({
       style={[
         style,
         underlined && styles.underlined,
-        { fontSize: size, color, fontWeight: weight },
+        { fontSize: size, color, fontWeight: weight, width },
       ]}>
       {children}
     </Text>

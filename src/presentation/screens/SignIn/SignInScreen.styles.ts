@@ -24,17 +24,7 @@ export const useSignInScreenStyles = () => {
     },
     signInAdditionalsContainer: {
       flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    rememberMeContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 8,
-    },
-    rememberMeCheckbox: {
-      width: 14,
-      height: 14,
+      justifyContent: "flex-end",
     },
     signInVariantsDivider: {
       flexDirection: "row",

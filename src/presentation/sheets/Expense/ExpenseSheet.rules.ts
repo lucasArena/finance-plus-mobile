@@ -16,7 +16,7 @@ import { formatStringToFloatUtil } from "@/application/utils/FormatStringToFloat
 const defaultSchema: Record<keyof IExpenseForm, Yup.AnyObject> = {
   key: Yup.string().notRequired(),
   expenseTypeId: Yup.string().required(),
-  description: Yup.string().required(),
+  description: Yup.string().notRequired(),
   value: Yup.string().required(),
   date: Yup.date().required(),
 }

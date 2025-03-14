@@ -13,6 +13,7 @@ import { ValidateUserEmailScreen } from "@/presentation/screens/ValidateUserEmai
 import { ForgetPasswordEmailScreen } from "@/presentation/screens/ForgetPassword/Email/ForgetPasswordEmailScreen"
 import { ForgetPasswordValidationCodeScreen } from "@/presentation/screens/ForgetPassword/ValidationCode/ForgetPasswordValidationCode"
 import { ForgetPasswordConfirmationScreen } from "@/presentation/screens/ForgetPassword/Confirmation/ForgetPasswordConfirmationScreen"
+import { PolicyAndTermsScreen } from "@/presentation/screens/PolicyAndTerms/PolicyAndTermsScreen"
 
 export const ReactNavigationRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator()
@@ -42,6 +43,10 @@ export const ReactNavigationRoutes: React.FC = () => {
           initialRouteName="SignIn">
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen
+            name="PolicyAndTerms"
+            component={PolicyAndTermsScreen}
+          />
           <Stack.Screen
             name="ValidateUserEmail"
             component={ValidateUserEmailScreen}

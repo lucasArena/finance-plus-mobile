@@ -23,6 +23,7 @@ export const useHomeScreenRules = () => {
     homeFacadeHook.data?.groupedExpenses.map(groupedExpense => ({
       value: groupedExpense.total,
       label: groupedExpense.name,
+      color: groupedExpense.color,
     })) || []
 
   const safeTotalExpenses = homeFacadeHook.data?.expenses.total ?? 0
@@ -51,7 +52,7 @@ export const useHomeScreenRules = () => {
           key: expense.key,
           expenseTypeId: expense.type.key,
           description: expense.description,
-          value: expense.value,
+          value: expense.value.toFixed(2).toString(),
           date: new Date(expense.date),
         },
       }),

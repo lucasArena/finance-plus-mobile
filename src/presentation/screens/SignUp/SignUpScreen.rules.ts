@@ -12,6 +12,7 @@ const schema = {
   email: yup.string().email().required(),
   password: yup.string().required(),
   showPassword: yup.boolean().notRequired(),
+  useTerms: yup.boolean().oneOf([true]),
 }
 
 export const useSignUpRules = () => {
@@ -22,6 +23,10 @@ export const useSignUpRules = () => {
 
   const handlePressNavigateToSignIn = () => {
     navigation.handleGoBack()
+  }
+
+  const handlePressPolicyTerms = () => {
+    navigation.handleNavigate("PolicyAndTerms")
   }
 
   const handleSignUp = (fields: ISignUpScreenForm) => {
@@ -57,5 +62,6 @@ export const useSignUpRules = () => {
     handleSubmit: form.handleSubmit(handleSignUp),
     handleSetValue: form.handleSetValue,
     handlePressNavigateToSignIn,
+    handlePressPolicyTerms,
   }
 }

@@ -13,6 +13,7 @@ import { useTheme } from "@/presentation/theme/Theme"
 
 import EyeOpendLogo from "@/presentation/assets/eye-opened.svg"
 import EyeClosedLogo from "@/presentation/assets/eye-closed.svg"
+import { CheckboxComponent } from "@/presentation/components/Checkbox/CheckboxComponent"
 
 export const SignUpScreen = () => {
   const theme = useTheme()
@@ -81,6 +82,28 @@ export const SignUpScreen = () => {
               helperText={rules.errors.email?.password}
               onChangeText={value => rules.handleSetValue("password", value)}
             />
+
+            <View style={styles.policyAndTermsContainer}>
+              <CheckboxComponent
+                isChecked={rules.values.useTerms}
+                fillColor={theme.secondary.green}
+                onPress={() =>
+                  rules.handleSetValue("useTerms", !rules.values.useTerms)
+                }
+              />
+
+              <TextComponent color={theme.white.light} size={14} weight={400}>
+                Concordo com a{" "}
+                <TextComponent
+                  color={theme.white.light}
+                  size={14}
+                  underlined
+                  weight={700}
+                  onPress={() => rules.handlePressPolicyTerms()}>
+                  politica de privacidade e termos
+                </TextComponent>
+              </TextComponent>
+            </View>
 
             <ButtonComponent
               variant="primary"
