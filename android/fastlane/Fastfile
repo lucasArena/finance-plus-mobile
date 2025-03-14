@@ -18,7 +18,12 @@ default_platform(:android)
 platform :android do
   desc "Submit app for internal testing on Google Play Console"
   lane :beta do
-    gradle(task: "clean assembleRelease")  
+    gradle(
+      task: "clean assembleRelease",
+      properties: {
+        "distribution" => "internal"
+      }
+    )  
     upload_to_play_store(track: 'internal')
   end
 
