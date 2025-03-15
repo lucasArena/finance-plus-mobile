@@ -32,18 +32,13 @@ jobs:
         run: |
           echo "${ANDROID_KEYSTORE_BASE64}" | base64 --decode > android/app/bluefin.keystore
 
-      - name: Install native dependencies
-        run: |
-          gem install bundler
-          bundler install
-
       - name: Install dependencies
         run: |
           yarn install
 
       - name: Run Fastlane to upload Android build to Google Play
         run: |
-          fastlane android beta
+          bundle exec fastlane android beta
 
       - name: Clean up
         run: rm /tmp/google-play-service-account.json
