@@ -41,7 +41,7 @@ jobs:
 
       - name: Run Fastlane to upload Android build to Google Play
         run: |
-          fastlane android beta --user-install
+          fastlane android beta
 
       - name: Clean up
         run: rm android/google-play-service-account.json
