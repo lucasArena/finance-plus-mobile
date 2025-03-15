@@ -32,6 +32,11 @@ jobs:
         run: |
           echo "${ANDROID_KEYSTORE_BASE64}" | base64 --decode > android/app/bluefin.keystore
 
+      - name: Install nativedependencies
+        run: |
+          gem install bundler
+          bundler install
+
       - name: Install dependencies
         run: |
           yarn install
