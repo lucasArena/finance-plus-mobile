@@ -11,12 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v4
-        with:
-          ruby-version: "3.1" # Not needed with a .ruby-version file
+      - uses: actions/checkout@v3
 
       - name: Install Bundler
         run: |
