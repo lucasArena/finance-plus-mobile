@@ -35,7 +35,7 @@ def set_new_version_to_package_json(version_name)
 end
 
 # @return [String]
-def package_version()
+def get_package_version()
 	package = load_json(json_path: "./package.json")
 	return package['version']
 end
