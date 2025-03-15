@@ -164,6 +164,7 @@ GEM
       xcpretty-travis-formatter (>= 0.0.3, < 2.0.0)
     fastlane-plugin-get_version_name (0.2.2)
     fastlane-plugin-increment_version_code (0.4.3)
+    fastlane-plugin-load_json (0.0.1)
     fastlane-plugin-versioning_android (0.1.1)
     fastlane-sirp (1.0.0)
       sysrandom (~> 1.0)
@@ -294,6 +295,7 @@ DEPENDENCIES
   fastlane
   fastlane-plugin-get_version_name
   fastlane-plugin-increment_version_code (~> 0.4.3)
+  fastlane-plugin-load_json
   fastlane-plugin-versioning_android
   xcodeproj (< 1.26.0)
 
