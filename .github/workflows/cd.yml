@@ -13,10 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          bundle install  # Installs Fastlane if it's in the Gemfile
-
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
