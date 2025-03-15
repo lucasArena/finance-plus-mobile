@@ -13,10 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Bundler
-        run: |
-          gem install bundler --user-install
-
       - name: Install dependencies
         run: |
           bundle install  # Installs Fastlane if it's in the Gemfile
@@ -45,7 +41,7 @@ jobs:
 
       - name: Run Fastlane to upload Android build to Google Play
         run: |
-          bundle exec fastlane android beta
+          fastlane android beta --user-install
 
       - name: Clean up
         run: rm android/google-play-service-account.json
