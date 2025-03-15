@@ -26,11 +26,16 @@ jobs:
         run: |
           echo "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" > android/google-play-service-account.json
 
-      - name: Download Bluefin keystore
+      - name: Download Bluefin keystore base 64
         env:
           ANDROID_KEYSTORE_BASE64: ${{secrets.ANDROID_KEYSTORE_BASE64}}
         run: |
           echo "${ANDROID_KEYSTORE_BASE64}" | base64 --decode > android/app/bluefin.keystore
+
+      - name: Install native dependencies
+        run: |
+          gem install bundler
+          bundler install
 
       - name: Install dependencies
         run: |
