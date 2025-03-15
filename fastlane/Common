@@ -1,0 +1,41 @@
+##### Semantic Version #####
+def get_new_version_number(current_version)
+  # Get the latest commit message
+  commit_message = sh("git log -1 --pretty=%B").strip
+  
+  major, minor, patch = current_version.split('.').map(&:to_i)
+
+  # Ensure major, minor, and patch are integers
+  major ||= 0
+  minor ||= 0
+  patch ||= 0
+  
+  # Determine version bump based on commit type
+  if commit_message.match?(/^BREAKING CHANGE|!: /)
+    major += 1
+    minor = 0
+    patch = 0
+  elsif commit_message.start_with?("feat:")
+    minor += 1
+    patch = 0
+  elsif commit_message.start_with?("fix:")
+    patch += 1
+  elsif commit_message.start_with?("refactor:")
+    patch += 1
+  else
+    puts "No version bump needed."
+    return
+  end
+
+  return "#{major}.#{minor}.#{patch}"
+end
+
+def set_new_version_to_package_json(version_name)
+	sh("cd .. && yarn version --patch --no-git-tag-version --no-commit-hooks --new-version #{version_name}")
+end
+
+# @return [String]
+def package_version()
+	package = load_json(json_path: "./package.json")
+	return package['version']
+end

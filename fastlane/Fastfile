@@ -1,0 +1,49 @@
+import './Common'
+
+default_platform(:android)
+
+ANDROID_BUILD_GRADLE_PATH = "./android/app/build.gradle".freeze
+
+platform :android do
+  desc "Submit app for internal testing on Google Play Console"
+  lane :beta do
+    current_version = get_package_version()
+    new_version_name = get_new_version_number(current_version)
+
+    android_set_version_name(
+      version_name: new_version_name,
+      gradle_file: ANDROID_BUILD_GRADLE_PATH
+    )
+
+    set_new_version_to_package_json(new_version_name)
+
+    previous_build_number = google_play_track_version_codes(
+      track: "internal",      
+    )[0]
+
+    android_set_version_code(
+      version_code: previous_build_number + 1,
+      gradle_file: ANDROID_BUILD_GRADLE_PATH
+    )
+
+    gradle(
+      project_dir: 'android',
+      task: "clean bundleRelease",
+      properties: {
+        "distribution" => "internal",
+        "signingConfig" => "release"
+      }
+    )
+
+    upload_to_play_store(
+      track: 'internal',
+      aab: './android/app/build/outputs/bundle/release/app-release.aab'
+    )
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+end
