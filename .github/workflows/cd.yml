@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BLUEFIN_BASE_URL: ${{ secrets.BLUEFIN_BASE_URL }}
+      DECRYPT_KEY: ${{ secrets.DECRYPT_KEY }}
 
     steps:
       - uses: actions/checkout@v3

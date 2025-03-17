@@ -11,6 +11,9 @@ const currentDate = new Date()
 
 export const useHomeScreenRules = () => {
   const [date, setDate] = useState<Date>(currentDate)
+  const [hideSensitiveInformation, setHideSenstiveInformation] =
+    useState<boolean>(true)
+
   const createNewExpenseRef =
     useRef<IBottomSheetComponentRef<IExpenseSheetProps>>(null)
 
@@ -29,6 +32,10 @@ export const useHomeScreenRules = () => {
   const safeTotalExpenses = homeFacadeHook.data?.expenses.total ?? 0
 
   const isShowMoreExpensesButtonVisable = safeTotalExpenses > EXPENSES_LIMIT
+
+  const handleToggleSensitiveInformation = () => {
+    setHideSenstiveInformation(!hideSensitiveInformation)
+  }
 
   const handleChangeDate = (selectedDate: Date) => {
     const safeYear = selectedDate.getFullYear()
@@ -73,13 +80,15 @@ export const useHomeScreenRules = () => {
   }, [])
 
   return {
-    createNewExpenseRef,
     date,
+    hideSensitiveInformation,
+    createNewExpenseRef,
     error: homeFacadeHook.error,
     isWaiting: homeFacadeHook.isWaiting,
     isShowMoreExpensesButtonVisable,
     expenses: safeExpenses,
     expensesGrouped: safeExpensesGrouped,
+    handleToggleSensitiveInformation,
     handleChangeDate,
     handleOpenCreateNewExpenses,
     handleCloseCreateNewExpenses,

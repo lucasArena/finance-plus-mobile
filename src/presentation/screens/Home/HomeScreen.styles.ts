@@ -18,6 +18,13 @@ export const useHomeScreenStyles = () => {
     chartContainer: {
       gap: 8,
     },
+    chartTitle: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    toggleSensitiveIcon: {
+      paddingRight: 50,
+    },
     cardContent: {
       gap: 16,
     },

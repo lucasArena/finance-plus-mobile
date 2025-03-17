@@ -40,6 +40,7 @@ export const SignInScreen = () => {
             value={rules.values.email}
             disabled={rules.isWaiting}
             autoCapitalize="none"
+            keyboardType="email-address"
             onChangeText={value => rules.handleSetValue("email", value)}
             error={!!rules.errors.email}
             helperText={rules.errors.email?.message}

@@ -1,5 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react"
-import { BottomSheetModal } from "@gorhom/bottom-sheet"
+import {
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+  BottomSheetModal,
+} from "@gorhom/bottom-sheet"
 import { useBottomSheetContainerComponentStyles } from "@/presentation/components/BottomSheet/Container/BottomSheetContainerComponent.styles"
 import { IBottomSheetContainerComponentProps } from "@/presentation/components/BottomSheet/Container/BottomSheetContainerComponent.types"
 
@@ -19,12 +23,23 @@ export const BottomSheetContainerComponent = forwardRef(
       },
     }))
 
+    const handleRenderBackdrop = (backDropProps: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...backDropProps}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        opacity={0.5}
+        pressBehavior="none"
+      />
+    )
+
     return (
       <BottomSheetModal
         enableDynamicSizing
         snapPoints={[]}
         ref={bottomSheetRef}
         containerStyle={styles.container}
+        backdropComponent={handleRenderBackdrop}
         backgroundStyle={styles.background}>
         {({ data }) => <props.SheetComponent {...data} />}
       </BottomSheetModal>

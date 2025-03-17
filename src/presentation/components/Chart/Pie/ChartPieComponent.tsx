@@ -8,6 +8,7 @@ import { useTheme } from "@/presentation/theme/Theme"
 import { useChartPieComponentStyles } from "@/presentation/components/Chart/Pie/ChartPieComponent.styles"
 import { useChartComponentRules } from "@/presentation/components/Chart/Pie/ChartPieComponent.rules"
 import { IChartPieComponentProps } from "@/presentation/components/Chart/Pie/ChartPieComponent.types"
+import { MoneyHideComponent } from "@/presentation/components/Money/MoneyHideComponent"
 
 export const ChartPieComponent: React.FC<IChartPieComponentProps> = props => {
   const theme = useTheme()
@@ -26,10 +27,19 @@ export const ChartPieComponent: React.FC<IChartPieComponentProps> = props => {
           }))}
           centerLabelComponent={() => (
             <TextComponent size={18} color={theme.white.light} weight={700}>
-              {rules.total.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
+              {props.hideSensitiveInformation ? (
+                <MoneyHideComponent
+                  length={5}
+                  size={18}
+                  color={theme.white.light}
+                  weight={700}
+                />
+              ) : (
+                rules.total.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })
+              )}
             </TextComponent>
           )}
           donut

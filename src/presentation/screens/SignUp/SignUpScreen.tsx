@@ -93,14 +93,14 @@ export const SignUpScreen = () => {
               />
 
               <TextComponent color={theme.white.light} size={14} weight={400}>
-                Concordo com a{" "}
+                Aceito as{" "}
                 <TextComponent
                   color={theme.white.light}
                   size={14}
                   underlined
                   weight={700}
                   onPress={() => rules.handlePressPolicyTerms()}>
-                  politica de privacidade e termos
+                  politicas de uso e privacidade
                 </TextComponent>
               </TextComponent>
             </View>

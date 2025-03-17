@@ -4,4 +4,5 @@ export interface IChartPieComponentProps {
     label: string
     color: string
   }[]
+  hideSensitiveInformation?: boolean
 }

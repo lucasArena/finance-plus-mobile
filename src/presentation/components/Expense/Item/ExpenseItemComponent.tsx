@@ -5,6 +5,7 @@ import { TextComponent } from "@/presentation/components/Text/TextComponent"
 import { useTheme } from "@/presentation/theme/Theme"
 import { useExpenseItemComponentStyles } from "@/presentation/components/Expense/Item/ExpenseItemComponent.styles"
 import { IExpenseItemComponentProps } from "@/presentation/components/Expense/Item/ExpenseItemComponent.types"
+import { MoneyHideComponent } from "@/presentation/components/Money/MoneyHideComponent"
 
 export const ExpenseItemComponent: React.FC<
   IExpenseItemComponentProps
@@ -29,10 +30,19 @@ export const ExpenseItemComponent: React.FC<
             </TextComponent>
 
             <TextComponent color={theme.error} size={14} weight={400}>
-              {new Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              }).format(props.value)}
+              {props.hideSensitiveInformation ? (
+                <MoneyHideComponent
+                  color={theme.error}
+                  size={14}
+                  weight={400}
+                  length={4}
+                />
+              ) : (
+                new Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(props.value)
+              )}
             </TextComponent>
           </View>
 

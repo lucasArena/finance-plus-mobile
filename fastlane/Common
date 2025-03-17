@@ -39,3 +39,14 @@ def get_package_version()
 	package = load_json(json_path: "./package.json")
 	return package['version']
 end
+
+def git_commit()
+	unless `git status --porcelain`.empty?
+		git_add()
+		sh('git commit -m "chore: updated semantic version [skip ci]" --no-verify')
+	end
+end
+
+def git_push(branch = GIT_BUILD_SOURCE_BRANCH)
+	sh("git push origin #{branch} --force --no-verify")
+end

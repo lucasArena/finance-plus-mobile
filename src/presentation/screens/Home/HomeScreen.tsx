@@ -22,6 +22,8 @@ import { ActivityIndicatorComponent } from "@/presentation/components/ActitityIn
 
 import ExclamationCircleLogo from "@/presentation/assets/exclamation-circle-logo.svg"
 import CheckCircleLogo from "@/presentation/assets/check-circle-logo.svg"
+import EyeClosedLogo from "@/presentation/assets/eye-closed.svg"
+import EyeOpenedLogo from "@/presentation/assets/eye-opened.svg"
 import MoneySendSquareLogo from "@/presentation/assets/money-send-square-logo.svg"
 import { BottomSheetContainerComponent } from "@/presentation/components/BottomSheet/Container/BottomSheetContainerComponent"
 import { ExpenseSheet } from "@/presentation/sheets/Expense/ExpenseSheet"
@@ -67,9 +69,28 @@ export const HomeScreen: React.FC = () => {
         {!rules.error && !rules.isWaiting ? (
           <>
             <View style={styles.chartContainer}>
-              <TextComponent size={18} color={theme.white.light} weight={700}>
-                Gastos do mês
-              </TextComponent>
+              <View style={styles.chartTitle}>
+                <TextComponent size={18} color={theme.white.light} weight={700}>
+                  Gastos do mês
+                </TextComponent>
+
+                <Pressable
+                  onPress={() => rules.handleToggleSensitiveInformation()}>
+                  {rules.hideSensitiveInformation ? (
+                    <EyeClosedLogo
+                      width={24}
+                      height={24}
+                      style={styles.toggleSensitiveIcon}
+                    />
+                  ) : (
+                    <EyeOpenedLogo
+                      width={24}
+                      height={24}
+                      style={styles.toggleSensitiveIcon}
+                    />
+                  )}
+                </Pressable>
+              </View>
 
               <CardComponent>
                 {emptyExpenses ? (
@@ -80,7 +101,10 @@ export const HomeScreen: React.FC = () => {
                     subtitle="Comece do zero com equilíbrio e foco nos seus objetivos."
                   />
                 ) : (
-                  <ChartPieComponent data={rules.expensesGrouped} />
+                  <ChartPieComponent
+                    data={rules.expensesGrouped}
+                    hideSensitiveInformation={rules.hideSensitiveInformation}
+                  />
                 )}
               </CardComponent>
             </View>
@@ -133,6 +157,9 @@ export const HomeScreen: React.FC = () => {
                           description={expense.description}
                           value={expense.value}
                           typeName={expense.type.name}
+                          hideSensitiveInformation={
+                            rules.hideSensitiveInformation
+                          }
                           onPress={() =>
                             rules.handleOpenCreateNewExpenses(expense)
                           }
@@ -150,7 +177,9 @@ export const HomeScreen: React.FC = () => {
       </ScrollView>
 
       <View style={styles.fabContainer}>
-        <Pressable onPress={() => rules.handleOpenCreateNewExpenses()}>
+        <Pressable
+          disabled={rules.isWaiting || !!rules.error}
+          onPress={() => rules.handleOpenCreateNewExpenses()}>
           <View style={styles.fab}>
             <MoneySendSquareLogo />
           </View>

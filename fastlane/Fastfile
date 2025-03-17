@@ -26,6 +26,8 @@ platform :android do
       gradle_file: ANDROID_BUILD_GRADLE_PATH
     )
 
+    git_commit()
+
     gradle(
       project_dir: 'android',
       task: "clean bundleRelease",
@@ -37,13 +39,10 @@ platform :android do
 
     upload_to_play_store(
       track: 'internal',
+      release_status: 'draft',
       aab: './android/app/build/outputs/bundle/release/app-release.aab'
     )
-  end
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
+    git_push()
   end
 end
