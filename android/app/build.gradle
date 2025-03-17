@@ -83,10 +83,10 @@ android {
         applicationId "com.bluefin"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "0.0.4"
+        versionCode 3
+        versionName "0.0.5"
     }
-    signingConfigs {
+    signingConfigs{
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
