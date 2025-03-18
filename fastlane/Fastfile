@@ -4,9 +4,19 @@ default_platform(:android)
 
 ANDROID_BUILD_GRADLE_PATH = "./android/app/build.gradle".freeze
 
-platform :android do
-  desc "Submit app for internal testing on Google Play Console"
-  lane :beta do
+platform :android do  
+  lane :build do
+    gradle(
+      project_dir: 'android',
+      task: "clean bundleRelease",
+      properties: {
+        "distribution" => "internal",
+        "signingConfig" => "release"
+      }
+    )
+  end
+
+  lane :bump do
     current_version = get_package_version()
     new_version_name = get_new_version_number(current_version)
 
@@ -24,21 +34,21 @@ platform :android do
     android_set_version_code(
       version_code: previous_build_number + 1,
       gradle_file: ANDROID_BUILD_GRADLE_PATH
-    )    
-
-    gradle(
-      project_dir: 'android',
-      task: "clean bundleRelease",
-      properties: {
-        "distribution" => "internal",
-        "signingConfig" => "release"
-      }
     )
+  end
+
+  lane :upload do |options|
+    aab = options[:path] || './android/app/build/outputs/bundle/release/app-release.aab'
 
     upload_to_play_store(
       track: 'internal',
       release_status: 'draft',
-      aab: './android/app/build/outputs/bundle/release/app-release.aab'
+      aab: aab
     )    
+  end
+
+  lane :git do
+    git_commit()
+    git_push()
   end
 end
