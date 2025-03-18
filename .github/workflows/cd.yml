@@ -21,6 +21,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: android-release
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
           path: ./artifacts
 
       - name: Download Google Play service account JSON file
