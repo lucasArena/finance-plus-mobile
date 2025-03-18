@@ -78,3 +78,5 @@ vendor
 .env.example
 .env.localhost
 .env.production
+
+fastlane/README.md

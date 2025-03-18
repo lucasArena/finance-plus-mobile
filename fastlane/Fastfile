@@ -2,6 +2,9 @@ import './Common'
 
 default_platform(:android)
 
+ENV_BUILD_SOURCE_BRANCH = ENV['BUILD_SOURCEBRANCH'] || ""
+GIT_BUILD_SOURCE_BRANCH = ENV_BUILD_SOURCE_BRANCH.sub(/refs\/heads\//, '').freeze
+
 ANDROID_BUILD_GRADLE_PATH = "./android/app/build.gradle".freeze
 
 platform :android do  

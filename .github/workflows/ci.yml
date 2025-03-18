@@ -49,6 +49,9 @@ jobs:
         run: |
           bundle exec fastlane android build
 
+      - name: Clean up sensitive files
+        run: rm android/google-play-service-account.json
+
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
