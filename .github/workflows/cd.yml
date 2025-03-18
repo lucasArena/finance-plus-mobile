@@ -29,6 +29,6 @@ jobs:
         run: |
           echo "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" > android/google-play-service-account.json
 
-      - name: Git commit new bump
+      - name: Upload Android release
         run: |
           bundle exec fastlane android upload path:./artifacts/app-release.aab
